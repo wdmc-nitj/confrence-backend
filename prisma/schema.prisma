@@ -6,6 +6,175 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String   @id @map("_id")  @default(auto()) @db.ObjectId
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Home{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  ConfName  String   
+  ConfDate  DateTime  
+  AboutConf String
+  AboutIns  String
+  YoutubeLink String
+  InstaLink String
+  FacebookLink String
+  TwitterLink String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model EventDates{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Title     String   
+  Order     Int
+  Extended  Boolean
+  Newdate   DateTime
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Annoucment{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Title1    String
+  Title2    String
+  Description String
+  Show      Boolean
+  Order     Int
+  New       Boolean
+  ShowViewAll Boolean
+  Link      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model ImageSlider{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Name      String
+  ImgLink   String
+  Show      Boolean
+  Order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+
+model Sponsors{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Type      String
+  Logo      String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Awards{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Title     String
+  Description String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Speakers{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Name      String
+  Designation String
+  Institute String
+  ProfileLink String
+  ImgLink   String
+  TalkType  String
+  TalkTitle String
+  Abstract  String
+  Bio       String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model Committees{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Type      String
+  Subtype   String
+  Name      String
+  Designation String
+  Institute String
+  ProfileLink String
+  ImgLink   String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+
+model Contact{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Title     String
+  Name      String
+  Designation String
+  Institute String
+  ProfileLink String
+  Phone     String
+  Email     String
+  Fax       String
+  Show      Boolean
+  Order     Int
+  LocationDes String
+  LocatinLInk String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+
+model Certificate{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Title     String
+  Description String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+model participant{
+  id        String   @id @map("_id") @db.ObjectId @default(auto())
+  userId    String   @db.ObjectId
+  Name      String
+  Designation String
+  Institute String
+  ProfileLink String
+  ImgLink   String
+  Order     Int
+  Show      Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
+
+
+
+
+
