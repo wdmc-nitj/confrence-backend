@@ -11,15 +11,15 @@ datasource db {
 }
 
 model Confrence {
-  id          String        @id @default(auto()) @map("_id") @db.ObjectId
-  email       String?       @unique
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  email       String?        @unique
   name        String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @default(now()) @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @default(now()) @updatedAt
   Home        Home[]
   EventDates  EventDates[]
-  Annoucment  Annoucment[]
-  ImageSlider ImageSlider[]
+  Annoucement Announcement[]
+  Images      Images[]
   Sponsors    Sponsors[]
   Awards      Awards[]
   Speakers    Speakers[]
@@ -49,38 +49,39 @@ model EventDates {
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
   Title     String?
-  Order     Int       @default(0)
+  sequence  Int       @default(0)
   Extended  Boolean   @default(false)
   Newdate   DateTime?
-  Show      Boolean   @default(true)
+  completed Boolean   @default(false)
+  feature   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
 
-model Annoucment {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Title1      String
-  Title2      String?
-  Description String
-  Show        Boolean   @default(true)
-  Order       Int       @default(0)
-  New         Boolean   @default(true)
-  ShowViewAll Boolean   @default(false)
-  Link        String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+model Announcement {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  ConfId          String    @db.ObjectId
+  Conf            Confrence @relation(fields: [ConfId], references: [id])
+  Title           String
+  MetaDescription String?
+  Description     String
+  feature         Boolean   @default(true)
+  sequence        Int       @default(0)
+  New             Boolean   @default(true)
+  hidden          Boolean   @default(false)
+  Link            String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @default(now()) @updatedAt
 }
 
-model ImageSlider {
+model Images {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
   Name      String?
   ImgLink   String
-  Show      Boolean   @default(true)
-  Order     Int       @default(0)
+  feature   Boolean   @default(true)
+  sequence  Int       @default(0)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -89,10 +90,11 @@ model Sponsors {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
+  name      String
   Type      String
   Logo      String?
-  Order     Int       @default(0)
-  Show      Boolean   @default(true)
+  sequence  Int       @default(0)
+  feature   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -104,10 +106,10 @@ model Awards {
   Title1      String
   Title2      String?
   Description String?
-  Order       Int       @default(0)
-  Show        Boolean   @default(true)
+  sequence    Int       @default(0)
+  feature     Boolean   @default(true)
   New         Boolean   @default(true)
-  ShowViewAll Boolean   @default(false)
+  hidden      Boolean   @default(false)
   Link        String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
@@ -126,8 +128,8 @@ model Speakers {
   TalkTitle   String
   Abstract    String?
   Bio         String?
-  Order       Int       @default(0)
-  Show        Boolean   @default(true)
+  sequence    Int       @default(0)
+  feature     Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
 }
@@ -143,8 +145,8 @@ model Committees {
   Institute   String
   ProfileLink String
   ImgLink     String?
-  Order       Int       @default(0)
-  Show        Boolean   @default(true)
+  sequence    Int       @default(0)
+  feature     Boolean   @default(true)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
 }
@@ -162,8 +164,8 @@ model Contact {
   Phone       String
   Email       String
   Fax         String?
-  Show        Boolean   @default(true)
-  Order       Int       @default(0)
+  feature     Boolean   @default(true)
+  sequence    Int       @default(0)
   LocationDes String?
   LocatinLink String?
   createdAt   DateTime  @default(now())
@@ -193,4 +195,15 @@ model participant {
   PaperId           String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @default(now()) @updatedAt
+}
+
+model Navbar {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  ConfId     String   @db.ObjectId
+  heading    String
+  subheading String
+  url        String
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 }
