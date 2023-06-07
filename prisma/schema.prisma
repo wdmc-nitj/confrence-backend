@@ -12,7 +12,7 @@ datasource db {
 
 model Confrence {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
-  email       String?        @unique
+  email       String        @unique
   name        String?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @default(now()) @updatedAt
@@ -29,7 +29,7 @@ model Confrence {
 
 model Home {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId        String    @db.ObjectId
+  ConfId        String    @db.ObjectId @unique
   Conf          Confrence @relation(fields: [ConfId], references: [id])
   ConfName      String
   ConfstartDate DateTime
