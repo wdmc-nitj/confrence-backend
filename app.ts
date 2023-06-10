@@ -9,6 +9,7 @@ import verifyAdmin from './utils/middleware';
 import conf from './routes/conf';
 import home from './routes/home';
 import navbar from './routes/navbar';
+import participant from './routes/participant';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(verifyAdmin);
 app.use('/conf', conf);
 app.use('/home', home);
 app.use('/navbar', navbar);
+app.use('/participant', participant);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
