@@ -43,7 +43,7 @@ router.post('/', async (req: Request, res: Response) => {
 router.put('/:id', async (req: Request, res: Response) => {
     try {
         const participant: participant = req.body;
-        await updateParticipant(participant);
+        await updateParticipant(participant, req.params.id);
         res.status(200).json({ "response": "Participant Updated Successfully" });
     } 
     catch (e: any) {
