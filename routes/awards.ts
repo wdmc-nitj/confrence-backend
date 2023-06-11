@@ -24,12 +24,19 @@ awardsRouter.delete('/:id', awardsController.deleteAward);
 
 export default awardsRouter;
 
+/**
+ * @swagger
+ * tags:
+ *   name: Awards
+ *   description: API endpoints for Awards
+ */
 
 /**
  * @swagger
  * /awards/conference/{id}:
  *   get:
  *     summary: Get awards by conference ID
+ *     tags: [Awards]
  *     description: Retrieve awards based on the conference ID
  *     parameters:
  *       - name: id
@@ -51,6 +58,7 @@ export default awardsRouter;
  * @swagger
  * /awards:
  *   get:
+ *     tags: [Awards]
  *     summary: Get all awards
  *     description: Retrieve all awards
  *     responses:
@@ -59,6 +67,7 @@ export default awardsRouter;
  *       500:
  *         description: Internal server error
  *   post:
+ *     tags: [Awards]
  *     summary: Create a new award
  *     description: Create a new award
  *     requestBody:
@@ -78,6 +87,7 @@ export default awardsRouter;
  * @swagger
  * /awards/{id}:
  *   get:
+ *     tags: [Awards]
  *     summary: Get an award by ID
  *     description: Retrieve an award by its ID
  *     parameters:
@@ -95,6 +105,7 @@ export default awardsRouter;
  *       500:
  *         description: Internal server error
  *   put:
+ *     tags: [Awards]
  *     summary: Update an award by ID
  *     description: Update an award by its ID
  *     parameters:
@@ -118,6 +129,7 @@ export default awardsRouter;
  *       500:
  *         description: Internal server error
  *   delete:
+ *     tags: [Awards]
  *     summary: Delete an award by ID
  *     description: Delete an award by its ID
  *     parameters:
@@ -162,4 +174,3 @@ export default awardsRouter;
  *         Link:
  *           type: string
  */
-
