@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import awardsModel from '../models/awards';
 import prisma from '../config/client';
-
+import HttpException from '../models/http-exception';
 
 export default class AwardsController {
     // GET /awards/conference/:id
@@ -12,9 +12,11 @@ export default class AwardsController {
                 where: { ConfId: id },
             });
             res.json(awards);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 
@@ -23,9 +25,11 @@ export default class AwardsController {
         try {
             const awards = await prisma.awards.findMany();
             res.json(awards);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 
@@ -39,9 +43,11 @@ export default class AwardsController {
             } else {
                 res.status(404).json({ error: 'Award not found' });
             }
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 
@@ -51,9 +57,11 @@ export default class AwardsController {
         try {
             const createdAward = await prisma.awards.create({ data: newAward });
             res.json(createdAward);
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 
@@ -72,9 +80,11 @@ export default class AwardsController {
             } else {
                 res.status(404).json({ error: 'Award not found' });
             }
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 
@@ -89,9 +99,11 @@ export default class AwardsController {
             } else {
                 res.status(404).json({ error: 'Award not found' });
             }
-        } catch (error) {
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
+        } catch (error: any) {
+            throw new HttpException(
+                500,
+                error?.message || 'Internal server error',
+            );
         }
     }
 }
