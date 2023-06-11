@@ -107,7 +107,7 @@ model Awards {
   title2      String?
   description String?
   sequence    Int       @default(0)
-  feature     Boolean   @default(true)
+  featured     Boolean   @default(true)
   new         Boolean   @default(true)
   hidden      Boolean   @default(false)
   link        String?

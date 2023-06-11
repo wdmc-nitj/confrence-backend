@@ -165,7 +165,7 @@ export default awardsRouter;
  *           type: string
  *         sequence:
  *           type: number
- *         feature:
+ *         featured:
  *           type: boolean
  *         new:
  *           type: boolean
