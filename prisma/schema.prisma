@@ -91,10 +91,10 @@ model Sponsors {
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
   name      String
-  Type      String
-  Logo      String?
+  type      String
+  logo      String?
   sequence  Int       @default(0)
-  feature   Boolean   @default(true)
+  featured   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
