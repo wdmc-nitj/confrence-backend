@@ -24,8 +24,8 @@ app.use(verifyAdmin);
 app.use('/awards', awards);
 app.use('/conf', conf);
 app.use('/home', home);
-app.use('/navbar', navbar);
-app.use('/participant', participant);
+// app.use('/navbar', navbar);
+// app.use('/participant', participant);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
