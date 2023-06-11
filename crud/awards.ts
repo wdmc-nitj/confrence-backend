@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import awardsModel from '../models/awards';
-
-const prisma = new PrismaClient();
+import prisma from '../config/client';
 
 
 export default class AwardsController {
