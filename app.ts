@@ -8,6 +8,7 @@ import verifyAdmin from './utils/middleware';
 
 import conf from './routes/conf';
 import home from './routes/home';
+import awards from './routes/awards';
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use(verifyAdmin);
 
 app.use('/conf', conf);
 app.use('/home', home);
+app.use('/awards', awards);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
