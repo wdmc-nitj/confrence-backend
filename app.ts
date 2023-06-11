@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import verifyAdmin from './utils/middleware';
 // routes import
 
+import awards from './routes/awards';
 import conf from './routes/conf';
 import home from './routes/home';
 import navbar from './routes/navbar';
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(verifyAdmin);
 
-
+app.use('/awards', awards);
 app.use('/conf', conf);
 app.use('/home', home);
 app.use('/navbar', navbar);
