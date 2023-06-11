@@ -22,6 +22,7 @@ const options = {
   },
   apis: [
     './routes/awards.ts',
+    './routes/eventDate.ts',
     './routes/home.ts',
     './routes/navbar.ts',
     './routes/sponsors.ts',

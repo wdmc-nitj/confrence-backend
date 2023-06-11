@@ -8,6 +8,7 @@ import verifyAdmin from './utils/middleware';
 
 import awards from './routes/awards';
 import conf from './routes/conf';
+import eventDate from './routes/eventDate';
 import home from './routes/home';
 import navbar from './routes/navbar';
 import participant from './routes/participant';
@@ -24,6 +25,7 @@ app.use(verifyAdmin);
 
 app.use('/awards', awards);
 app.use('/conf', conf);
+app.use('/eventDates', eventDate);
 app.use('/home', home);
 // app.use('/navbar', navbar);
 // app.use('/participant', participant);
