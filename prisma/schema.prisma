@@ -48,12 +48,12 @@ model EventDates {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
-  Title     String?
+  title     String?
   sequence  Int       @default(0)
-  Extended  Boolean   @default(false)
-  Newdate   DateTime?
+  extended  Boolean   @default(false)
+  newDate   DateTime?
   completed Boolean   @default(false)
-  feature   Boolean   @default(true)
+  featured   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
