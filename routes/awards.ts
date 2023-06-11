@@ -157,20 +157,20 @@ export default awardsRouter;
  *       properties:
  *         ConfId:
  *           type: string
- *         Title1:
+ *         title1:
  *           type: string
- *         Title2:
+ *         title2:
  *           type: string
- *         Description:
+ *         description:
  *           type: string
  *         sequence:
  *           type: number
  *         feature:
  *           type: boolean
- *         New:
+ *         new:
  *           type: boolean
  *         hidden:
  *           type: boolean
- *         Link:
+ *         link:
  *           type: string
  */

@@ -1,11 +1,11 @@
 export default interface awards {
   ConfId: string;
-  Title1: string;
-  Title2: string;
-  Description: string;
+  title1: string;
+  title2: string;
+  description: string;
   sequence: number;
   featured: boolean;
-  New: boolean;
+  new: boolean;
   hidden: boolean;
-  Link: string;
+  link: string;
 }
