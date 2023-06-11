@@ -1,68 +1,69 @@
 import express from 'express';
 import { Request, Response } from 'express';
 import conf from '../models/conf';
-import { addConf, getConf, getConfById, updateConf, deleteConf } from '../crud/conf';
+import ConfController  from '../crud/conf';
 
 const router = express.Router();
+const confController = new ConfController();
 
 router.get('/', async (req: Request, res: Response) => {
     try{
-        const resp=await getConf();
+        const resp=await confController.getConf();
         res.status(200).json(resp);
     }
-    catch(e: any){
-        console.log(e);
-        res.status(500).json(e?.message || "Internal Server Error");
-    }    
+    catch (e:any) {
+        console.error("Error retrieving conf  items:", e);
+        res.status(500).json({ error: e?.message || "Internal server error" });
+      }  
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
     try{
         const id:string=req.params.id;
-        const resp=await getConfById(id);
+        const resp=await confController.getConfById(id);
         res.status(200).json(resp);
     }
-    catch(e: any){
-        console.log(e);
-        res.status(500).json(e?.message || "Internal Server Error");
-    }    
+    catch (e:any) {
+        console.error("Error retrieving conf items:", e);
+        res.status(500).json({ error: e?.message || "Internal server error" });
+      } 
 });
 
 router.post('/', async (req: Request, res: Response) => {
     try{
         const conf:conf=req.body;
-        await addConf(conf);
-        res.status(200).json({"response":"Added Successfully"});
+        await confController.addConf(conf);
+        res.status(200).json({success:"Added Successfully"});
     }
-    catch(e: any){
-        console.log(e);
-        res.status(500).json(e?.message || "Internal Server Error");
-    }
+    catch (e:any) {
+        console.error("Error retrieving navbar items:", e);
+        res.status(500).json({ error: e?.message || "Internal server error" });
+      }
 });
 
 
 router.put('/', async (req: Request, res: Response) => {
     try{
         const conf:conf=req.body;
-        await updateConf(conf);
-        res.status(200).json({"response":"Updated Successfully"});
+        await confController.updateConf(conf);
+        res.status(200).json({success:"Updated Successfully"});
     }
-    catch(e: any){
-        console.log(e);
-        res.status(500).json(e?.message || "Internal Server Error");
-    }
+    catch (e:any) {
+        console.error("Error retrieving navbar items:", e);
+        res.status(500).json({ error: e?.message || "Internal server error" });
+      }
 });
 
 router.delete('/:id', async (req: Request, res: Response) => {
     try{
         const id:string=req.params.id;
-        await deleteConf(id);
-        res.status(200).json({"response":"Deleted Successfully"});
+        await confController.deleteConf(id);
+        res.status(200).json({success:"Deleted Successfully"});
     }
-    catch(e: any){
-        console.log(e);
-        res.status(500).json(e?.message || "Internal Server Error");
-    }
+    catch (e:any) {
+        console.error("Error retrieving navbar items:", e);
+        res.status(500).json({ error: e?.message || "Internal server error" });
+      }
 });
 
 export default router;
