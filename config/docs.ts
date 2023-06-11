@@ -21,8 +21,11 @@ const options = {
     ]
   },
   apis: [
+    './routes/awards.ts',
+    './routes/eventDate.ts',
     './routes/home.ts',
-    './routes/navbar.ts'
+    './routes/navbar.ts',
+    './routes/sponsors.ts',
   ] // replace this with the path to your API routes
 };
 

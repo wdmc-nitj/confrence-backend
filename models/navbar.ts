@@ -1,15 +1,8 @@
-interface navbar {
-    mainHeadingName: string;
-    mainHeadingLink: string;
-    subheading: subheading[];
-  }
-  
-  interface subheading {
-    name: string;
-    link: string;
-    order: number;
-    show: boolean;
-  }
-  
-  export default navbar;
-  
+export default interface Navbar{
+  ConfId: string;
+  heading: string;
+  subheading: string;
+  link: string;
+  url: string;
+  name: string;
+}

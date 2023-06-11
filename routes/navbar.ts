@@ -1,84 +1,85 @@
-import express, { Request, Response } from 'express';
-import navbar, { subheading } from "../models/navbar";
-import {
-  addNavbar,
-  getNavbar,
-  getNavbarById,
-  updateNavbar,
-  deleteNavbar,
-} from "../crud/navbar";
+import express, { Request, Response } from "express";
+import NavbarController from "../crud/navbar";
+import Navbar from "../models/navbar";
+
 const router = express.Router();
+const Navbar = new NavbarController();
 
 // Get all navbar items
-router.get('/', async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
-    const navbarItems: navbar[] = await getNavbar();
-    res.json(navbarItems);
-  } catch (error) {
-    console.error('Error retrieving navbar items:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const navbarItems = await Navbar.getNavbar();
+    res.status(200).json(navbarItems);
+  } catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
   }
 });
 
 // Get a single navbar item by id
-router.get('/:id', async (req: Request, res: Response) => {
+router.get("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const navbarItem = await getNavbarById(id);
-    if (navbarItem) {
-      res.json(navbarItem);
-    } else {
-      res.status(404).json({ error: 'Navbar item not found' });
-    }
-  } catch (error) {
-    console.error('Error retrieving navbar item:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const navbarItem = await Navbar.getNavbarById(id);
+    res.status(200).json(navbarItem);
+  } 
+  catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
   }
 });
 
-// Create a new navbar item
-router.post('/', async (req: Request, res: Response) => {
-  const { mainHeadingName, mainHeadingLink, subheading } = req.body;
+// Get a navbar items by conference id
+router.get("/conf/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
-    const navbarItem: navbar = {
-      mainHeadingName,
-      mainHeadingLink,
-      subheading,
-    };
-
-    const createdNavbar = await addNavbar(navbarItem);
-    res.json(createdNavbar);
-  } catch (error) {
-    console.error('Error creating navbar item:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const navbarItem = await Navbar.getNavbarByConfId(id);
+    res.status(200).json(navbarItem);
+  } 
+  catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
   }
 });
 
-// Update a navbar item by id
-router.put('/:id', async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { mainHeadingName, mainHeadingLink, subheading } = req.body;
+// Add a navbar item
+
+router.post("/", async (req: Request, res: Response) => {
   try {
-    const navbarItem = await updateNavbar(
-      { mainHeadingName, mainHeadingLink, subheading },  // data to update navbar item
-      id,  // id of navbar item to update
-    );
-    res.json(navbarItem);
-  } catch (error) {
-    console.error('Error updating navbar item:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const navbarItem:Navbar = req.body;
+    await Navbar.addNavbar(navbarItem);
+    res.status(201).json({ success: "Navbar item added successfully" });
+  } catch (e:any) {
+    console.error("Error adding navbar item:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
   }
 });
 
-// Delete a navbar item by id
-router.delete('/:id', async (req: Request, res: Response) => {
+
+// Update a navbar item
+
+router.put("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const navbarItem = await deleteNavbar(id);
-    res.json(navbarItem);
-  } catch (error) {
-    console.error('Error deleting navbar item:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    const navbarItem:Navbar = req.body;
+    await Navbar.updateNavbar(navbarItem, id);
+    res.status(200).json({ success: "Navbar item updated successfully" });
+  } catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
+  }
+});
+
+// Delete a navbar item
+
+router.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    await Navbar.deleteNavbar(id);
+    res.status(200).json({ success: "Navbar item deleted successfully" });
+  } catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
+    res.status(500).json({ error: e?.message || "Internal server error" });
   }
 });
 

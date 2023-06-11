@@ -48,12 +48,12 @@ model EventDates {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
-  Title     String?
+  title     String?
   sequence  Int       @default(0)
-  Extended  Boolean   @default(false)
-  Newdate   DateTime?
+  extended  Boolean   @default(false)
+  newDate   DateTime?
   completed Boolean   @default(false)
-  feature   Boolean   @default(true)
+  featured   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -91,10 +91,10 @@ model Sponsors {
   ConfId    String    @db.ObjectId
   Conf      Confrence @relation(fields: [ConfId], references: [id])
   name      String
-  Type      String
-  Logo      String?
+  type      String
+  logo      String?
   sequence  Int       @default(0)
-  feature   Boolean   @default(true)
+  featured   Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -103,14 +103,14 @@ model Awards {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId      String    @db.ObjectId
   Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Title1      String
-  Title2      String?
-  Description String?
+  title1      String
+  title2      String?
+  description String?
   sequence    Int       @default(0)
-  feature     Boolean   @default(true)
-  New         Boolean   @default(true)
+  featured     Boolean   @default(true)
+  new         Boolean   @default(true)
   hidden      Boolean   @default(false)
-  Link        String?
+  link        String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
 }
