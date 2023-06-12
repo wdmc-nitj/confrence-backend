@@ -11,174 +11,158 @@ datasource db {
 }
 
 model Confrence {
-  id          String         @id @default(auto()) @map("_id") @db.ObjectId
-  email       String        @unique
-  name        String?
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @default(now()) @updatedAt
-  Home        Home[]
-  EventDates  EventDates[]
-  Annoucement Announcement[]
-  Images      Images[]
-  Sponsors    Sponsors[]
-  Awards      Awards[]
-  Speakers    Speakers[]
-  Committees  Committees[]
-  Contact     Contact[]
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  email         String   @unique
+  name          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
+  homeId        String?  @db.ObjectId
+  eventDatesId  String?  @db.ObjectId
+  annoucementId String[]
+  imagesId      String[]
+  sponsorsId    String[]
+  awardsId      String[]
+  speakersId    String[]
+  committeesId  String[]
+  contactId     String   @db.ObjectId
+  certificateId String[]
+  participantId String[]
+  navbarId      String[] @db.ObjectId
 }
 
 model Home {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId        String    @db.ObjectId @unique
-  Conf          Confrence @relation(fields: [ConfId], references: [id])
-  ConfName      String
-  ConfstartDate DateTime
-  ConfendDate   DateTime
-  AboutConf     String
-  AboutIns      String?
-  YoutubeLink   String?
-  InstaLink     String?
-  FacebookLink  String?
-  TwitterLink   String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  confName      String
+  confStartDate DateTime
+  confEndDate   DateTime
+  aboutConf     String
+  aboutIns      String?
+  youtubeLink   String?
+  instaLink     String?
+  facebookLink  String?
+  twitterLink   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
 }
 
 model EventDates {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
   title     String?
   sequence  Int       @default(0)
   extended  Boolean   @default(false)
   newDate   DateTime?
   completed Boolean   @default(false)
-  featured   Boolean   @default(true)
+  featured  Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
 
 model Announcement {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId          String    @db.ObjectId
-  Conf            Confrence @relation(fields: [ConfId], references: [id])
-  Title           String
-  MetaDescription String?
-  Description     String
-  feature         Boolean   @default(true)
-  sequence        Int       @default(0)
-  New             Boolean   @default(true)
-  hidden          Boolean   @default(false)
-  Link            String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @default(now()) @updatedAt
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  metaDescription String?
+  description     String
+  feature         Boolean  @default(true)
+  sequence        Int      @default(0)
+  new             Boolean  @default(true)
+  hidden          Boolean  @default(false)
+  link            String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
 }
 
 model Images {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
-  Name      String?
-  ImgLink   String
-  feature   Boolean   @default(true)
-  sequence  Int       @default(0)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  imgLink   String
+  feature   Boolean  @default(true)
+  sequence  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Sponsors {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   type      String
   logo      String?
-  sequence  Int       @default(0)
-  featured   Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
+  sequence  Int      @default(0)
+  featured  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Awards {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title1      String
   title2      String?
   description String?
-  sequence    Int       @default(0)
-  featured     Boolean   @default(true)
-  new         Boolean   @default(true)
-  hidden      Boolean   @default(false)
+  sequence    Int      @default(0)
+  featured    Boolean  @default(true)
+  new         Boolean  @default(true)
+  hidden      Boolean  @default(false)
   link        String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model Speakers {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Name        String
-  Designation String
-  Institute   String
-  ProfileLink String
-  ImgLink     String?
-  TalkType    String
-  TalkTitle   String
-  Abstract    String?
-  Bio         String?
-  sequence    Int       @default(0)
-  feature     Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  designation String
+  institute   String
+  profileLink String
+  imgLink     String?
+  talkType    String
+  talkTitle   String
+  abstract    String?
+  bio         String?
+  sequence    Int      @default(0)
+  feature     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model Committees {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Type        String
-  Subtype     String?
-  Name        String
-  Designation String
-  Institute   String
-  ProfileLink String
-  ImgLink     String?
-  sequence    Int       @default(0)
-  feature     Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  type        String
+  subtype     String?
+  name        String
+  designation String
+  institute   String
+  profileLink String
+  imgLink     String?
+  sequence    Int      @default(0)
+  feature     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model Contact {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Title       String
-  Name        String
-  Designation String
-  ImgLink     String?
-  Institute   String
-  ProfileLink String
-  Phone       String
-  Email       String
-  Fax         String?
-  feature     Boolean   @default(true)
-  sequence    Int       @default(0)
-  LocationDes String?
-  LocatinLink String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  name        String
+  designation String
+  imgLink     String?
+  institute   String
+  profileLink String
+  phone       String
+  email       String
+  fax         String?
+  feature     Boolean  @default(true)
+  sequence    Int      @default(0)
+  locationDes String?
+  locatinLink String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model Certificate {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String   @db.ObjectId
-  Title     String
-  Type      String
-  Desc1     String?
-  Desc2     String?
+  title     String
+  type      String
+  desc1     String?
+  desc2     String?
   pdf       Boolean  @default(false)
   img       Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -187,21 +171,19 @@ model Certificate {
 
 model participant {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId            String   @db.ObjectId
-  AuthorName        String
-  AuthorDesignation String
-  AuthorInstitute   String
-  PaperTitle        String
-  PaperId           String
+  authorName        String
+  authorDesignation String
+  authorInstitute   String
+  paperTitle        String
+  paperId           String
   createdAt         DateTime @default(now())
   updatedAt         DateTime @default(now()) @updatedAt
 }
 
 model Navbar {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId     String   @db.ObjectId
   heading    String
-  subheading String
+  subHeading String
   url        String
   name       String
   createdAt  DateTime @default(now())
