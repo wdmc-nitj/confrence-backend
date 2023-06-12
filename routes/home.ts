@@ -11,201 +11,168 @@ import {
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Home:
+ *       type: object
+ *       required:
+ *         - ConfId
+ *         - ConfName
+ *         - ConfstartDate
+ *         - ConfendDate
+ *         - AboutConf
+ *         - AboutIns
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated ID of the home content
+ *         ConfId:
+ *           type: string
+ *           description: The ID of the conference associated with the home content
+ *         ConfName:
+ *           type: string
+ *           description: The name of the conference
+ *         ConfstartDate:
+ *           type: string
+ *           description: The start date of the conference
+ *         ConfendDate:
+ *           type: string
+ *           description: The end date of the conference
+ *         AboutConf:
+ *           type: string
+ *           description: The description of the conference
+ *         AboutIns:
+ *           type: string
+ *           description: The description of the institution hosting the conference
+ *         YoutubeLink:
+ *           type: string
+ *           description: The YouTube link for the conference
+ *         InstaLink:
+ *           type: string
+ *           description: The Instagram link for the conference
+ *         FacebookLink:
+ *           type: string
+ *           description: The Facebook link for the conference
+ *         TwitterLink:
+ *           type: string
+ *           description: The Twitter link for the conference
+ *         createdAt:
+ *           type: string
+ *           description: The date and time the home content was created
+ *         updatedAt:
+ *           type: string
+ *           description: The date and time the home content was last updated
+ *       example:
+ *         ConfId: "12345"
+ *         ConfName: "Conference 1"
+ *         ConfstartDate: "2022-01-01T00:00:00.000Z"
+ *         ConfendDate: "2022-01-03T00:00:00.000Z"
+ *         AboutConf: "This is a conference about X"
+ *         AboutIns: "This conference is hosted by Y"
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Home
+ *   description: API for managing home content
+ */
+
+/**
+ * @swagger
  * /home:
  *   get:
- *     summary: fetches all content of home
+ *     summary: Fetch all home content
+ *     tags: [Home]
  *     responses:
  *       200:
- *         description: Return all content of home
+ *         description: Return all home content
  *         content:
- *              application/json:
- *                  schema:
- *                      type: array
- *                      items:
- *                         type: object
- *                         properties:
- *                              id: 
- *                                  type: string
- *                              ConfId: 
- *                                  type: string
- *                              ConfName:
- *                                  type: string
- *                              ConfstartDate:
- *                                  type: string
- *                              ConfendDate: 
- *                                  type: string
- *                              AboutConf: 
- *                                  type: string
- *                              AboutIns: 
- *                                  type: string
- *                              YoutubeLink: 
- *                                  type: string
- *                              InstaLink: 
- *                                  type: string
- *                              FacebookLink:
- *                                 type: string
- *                              TwitterLink: 
- *                                type: string
- *                              createdAt:
- *                                type: string
- *                              updatedAt:
- *                                 type: string                              
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Home'
  *       500:
  *         description: Internal Server Error
- *
- *
- *
  */
 
 /**
  * @swagger
  * /home/{id}:
- *
  *   get:
- *     summary: fetches all content of home by confid
+ *     summary: Fetch home content by ID
+ *     tags: [Home]
  *     parameters:
- *        - in: query
- *          name: id
- *          schema:
- *              type: string
- *          required: true
- *          description: id of the home
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the home content
  *     responses:
  *       200:
- *         description: Return content of home via confid
+ *         description: Return home content by ID
  *         content:
- *              application/json:
- *                  schema:
- *                         type: object
- *                         properties:
- *                                  id: 
- *                                      type: string
- *                                  ConfId: 
- *                                      type: string
- *                                  ConfName:
- *                                      type: string
- *                                  ConfstartDate:
- *                                      type: string
- *                                  ConfendDate: 
- *                                      type: string
- *                                  AboutConf: 
- *                                      type: string
- *                                  AboutIns: 
- *                                      type: string
- *                                  YoutubeLink: 
- *                                      type: string
- *                                  InstaLink: 
- *                                      type: string
- *                                  FacebookLink:
- *                                      type: string
- *                                  TwitterLink: 
- *                                      type: string
- *                                  createdAt:
- *                                      type: string
- *                                  updatedAt:
- *                                    type: string                              
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Home'
  *       500:
  *         description: Internal Server Error
- *
- *
- *
  */
 
 /**
  * @swagger
  * /home:
  *   post:
- *     summary: add content of home
+ *     summary: Add home content
+ *     tags: [Home]
  *     requestBody:
- *          content:
- *             application/json:
- *                 schema:
- *                      type: object
- *                      properties:
- *                              ConfId: 
- *                                  type: string
- *                              ConfName:
- *                                  type: string
- *                              ConfstartDate:
- *                                  type: string
- *                              ConfendDate: 
- *                                  type: string
- *                              AboutConf: 
- *                                  type: string
- *                              AboutIns: 
- *                                  type: string
- *                              YoutubeLink: 
- *                                  type: string
- *                              InstaLink: 
- *                                  type: string
- *                              FacebookLink:
- *                                 type: string
- *                              TwitterLink: 
- *                                type: string
- *                       
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Home'
  *     responses:
- *       200:
- *         description: Return response of add home
+ *       201:
+ *         description: Return response of add home content
  *         content:
- *              application/json:
- *                  schema:
- *                         type: object                               
+ *           application/json:
+ *             schema:
+ *               type: object
  *       500:
  *         description: Internal Server Error
- *
- *
- *
  */
 
 /**
  * @swagger
  * /home/{id}:
  *   put:
- *     summary: update content of home
- *   
- *      requestBody:
- *          content:
- *             application/json:
- *                 schema:
- *                      type: object
- *                      properties:
- *                              ConfId: 
- *                                  type: string
- *                              ConfName:
- *                                  type: string
- *                              ConfstartDate:
- *                                  type: string
- *                              ConfendDate: 
- *                                  type: string
- *                              AboutConf: 
- *                                  type: string
- *                              AboutIns: 
- *                                  type: string
- *                              YoutubeLink: 
- *                                  type: string
- *                              InstaLink: 
- *                                  type: string
- *                              FacebookLink:
- *                                 type: string
- *                              TwitterLink: 
- *                                type: string
- *                       
+ *     summary: Update home content by ID
+ *     tags: [Home]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the home content
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Home'
  *     responses:
  *       200:
- *         description: Return response of add home
+ *         description: Return response of update home content
  *         content:
- *              application/json:
- *                  schema:
- *                         type: object                               
+ *           application/json:
+ *             schema:
+ *               type: object
  *       500:
  *         description: Internal Server Error
- *
- *
- *
- *
  */
-
-
 
 const router = express.Router();
 
