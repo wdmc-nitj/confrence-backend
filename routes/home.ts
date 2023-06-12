@@ -1,77 +1,86 @@
-import express from "express";
-import { Request, Response } from "express";
-import home from "../models/home";
-import HomeController from "../crud/home";
+import express from 'express'
+import { Request, Response } from 'express'
+import home from '../models/home'
+import HomeController from '../crud/home'
 
-const router = express.Router();
-const homeController = new HomeController();
+const router = express.Router()
+const homeController = new HomeController()
 
-router.get("/", async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
-    const home = await homeController.getHome();
-    res.status(200).json(home);
-  } 
-  catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    const home = await homeController.getHome()
+    res.status(200).json(home)
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-router.get("/:id", async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
-    const home = await homeController.getHomeById(req.params.id);
-    res.status(200).json(home);
-  } 
-  catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    const home = await homeController.getHomeById(req.params.id)
+    res.status(200).json(home)
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-router.get("/conf/:id", async (req: Request, res: Response) => {
+router.get('/conf/:id', async (req: Request, res: Response) => {
   try {
-    const home = await homeController.getHomeByConfId(req.params.id);
-    res.status(200).json(home);
-  } catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    const home = await homeController.getHomeByConfId(req.params.id)
+    res.status(200).json(home)
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-router.post("/", async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
-    const home: home = req.body;
-    await homeController.addHome(home);
-    res.status(201).json({ response: "Home Added Successfully" });
-  }catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    const home: home = req.body
+    await homeController.addHome(home)
+    res.status(201).json({ response: 'Home Added Successfully' })
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-router.put("/:id", async (req: Request, res: Response) => {
+router.put('/:id', async (req: Request, res: Response) => {
   try {
-    const home: home = req.body;
-    await homeController.updateHome(home, req.params.id);
-    res.status(200).json({ response: "Home Updated Successfully" });
-  } catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    const home: home = req.body
+    await homeController.updateHome(home, req.params.id)
+    res.status(200).json({ response: 'Home Updated Successfully' })
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-router.delete("/:id", async (req: Request, res: Response) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   try {
-    await homeController.deleteHome(req.params.id);
-    res.status(200).json({ response: "Home Deleted Successfully" });
-  } catch (e:any) {
-    console.error("Error home items:", e);
-    res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
+    await homeController.deleteHome(req.params.id)
+    res.status(200).json({ response: 'Home Deleted Successfully' })
+  } catch (e: any) {
+    console.error('Error home items:', e)
+    res
+      .status(e?.code || 500)
+      .json({ error: e?.message || 'Internal server error' })
   }
-});
+})
 
-export default router;
-
+export default router
 
 /**
  * @swagger
@@ -80,9 +89,8 @@ export default router;
  *   description: API endpoints for Home
  */
 
-
 /**
- * @swagger 
+ * @swagger
  * /home:
  *  get:
  *    tags: [Home]
@@ -97,7 +105,7 @@ export default router;
  *                items:
  *                  $ref: '#/components/schemas/Home'
  *      500:
- *       description: Internal server error 
+ *       description: Internal server error
  *       content:
  *          application/json:
  *            schema:
@@ -131,10 +139,9 @@ export default router;
  *            application/json:
  *                schema:
  *                  $ref: '#/components/schemas/Error'
- * 
- * 
+ *
+ *
  */
-
 
 /**
  * @swagger
@@ -179,7 +186,7 @@ export default router;
  *          description: Home Id
  *          required: true
  *          schema:
- *            type: string  
+ *            type: string
  *    requestBody:
  *      required: true
  *      content:
@@ -235,8 +242,8 @@ export default router;
  *        application/json:
  *          schema:
  *              $ref: '#/components/schemas/Error'
- * 
- *     
+ *
+ *
  */
 
 /**
@@ -272,8 +279,8 @@ export default router;
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Error'
- * 
- *     
+ *
+ *
  */
 
 /**
@@ -371,4 +378,3 @@ export default router;
  *            type: string
  *            nullable: true
  */
-
