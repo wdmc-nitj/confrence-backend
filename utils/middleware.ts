@@ -66,6 +66,11 @@ const authenticate = () => {
         return res.status(403).json({ error: "Forbidden" });
       }
 
+      // If the user's access type is ADMIN, allow the request to proceed for all request types
+      if (user.accessType === AccessType.ADMIN) {
+        return next();
+      }
+
       // Determine the required access type based on the request method
       const requiredAccessType = determineAccessTypeFromRequestMethod(
         req.method
@@ -73,6 +78,10 @@ const authenticate = () => {
 
       // Check if the user's access type matches the required access type
       if (user.accessType !== requiredAccessType) {
+        // log both the user's access type and the required access type
+        console.log(
+          `User access type: ${user.accessType}, required access type: ${requiredAccessType}`
+        );
         return res.status(403).json({ error: "Forbidden" });
       }
 
@@ -84,6 +93,7 @@ const authenticate = () => {
     }
   };
 };
+
 
 // Helper function to determine the access type based on the request method
 const determineAccessTypeFromRequestMethod = (method: string) => {
