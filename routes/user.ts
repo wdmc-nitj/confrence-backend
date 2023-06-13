@@ -16,8 +16,23 @@ export default router;
 /**
  * @swagger
  * tags:
- *   name: User
- *   description: User management endpoints
+ *   name: Users
+ *   description: API endpoints for managing users
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       properties:
+ *         team:
+ *           type: string
+ *         token:
+ *           type: string
+ *         accessType:
+ *           type: string
  */
 
 /**
@@ -25,7 +40,7 @@ export default router;
  * /users:
  *   post:
  *     summary: Create a new user
- *     tags: [User]
+ *     tags: [Users]
  *     requestBody:
  *       required: true
  *       content:
@@ -34,16 +49,17 @@ export default router;
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: User created successfully
+ *         description: The created user
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       500:
  *         description: Internal server error
+ *
  *   get:
  *     summary: Get all users
- *     tags: [User]
+ *     tags: [Users]
  *     responses:
  *       200:
  *         description: List of users
@@ -55,14 +71,11 @@ export default router;
  *                 $ref: '#/components/schemas/User'
  *       500:
  *         description: Internal server error
- */
-
-/**
- * @swagger
+ *
  * /users/{id}:
  *   get:
  *     summary: Get a user by ID
- *     tags: [User]
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -72,18 +85,17 @@ export default router;
  *         description: ID of the user
  *     responses:
  *       200:
- *         description: User found
+ *         description: The requested user
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
  *       404:
  *         description: User not found
- *       500:
- *         description: Internal server error
+ *
  *   put:
- *     summary: Update a user
- *     tags: [User]
+ *     summary: Update a user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -99,16 +111,15 @@ export default router;
  *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: User updated successfully
+ *         description: The updated user
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/User'
- *       500:
- *         description: Internal server error
+ *
  *   delete:
- *     summary: Delete a user
- *     tags: [User]
+ *     summary: Delete a user by ID
+ *     tags: [Users]
  *     parameters:
  *       - in: path
  *         name: id
@@ -119,6 +130,13 @@ export default router;
  *     responses:
  *       200:
  *         description: User deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
  *       500:
  *         description: Internal server error
  */

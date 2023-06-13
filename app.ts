@@ -17,6 +17,7 @@ import participant from './routes/participant';
 // import sponsorsRouter from './routes/sponsors';
 import speakersRouter from './routes/speakers';
 import committeesRouter from './routes/committees';
+import usersRouter from './routes/user'
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.use('/participant', participant);
 // app.use('/sponsors', sponsorsRouter);
 app.use('/speakers', speakersRouter); 
 app.use('/committees', committeesRouter);
+app.use('/users', usersRouter);
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
