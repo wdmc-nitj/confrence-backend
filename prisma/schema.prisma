@@ -103,7 +103,7 @@ model Awards {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   ConfId      String    @db.ObjectId
   Conf        Confrence @relation(fields: [ConfId], references: [id])
-  title1      String
+  Title1      String
   title2      String?
   description String?
   sequence    Int       @default(0)
@@ -206,4 +206,14 @@ model Navbar {
   name       String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now()) @updatedAt
+}
+
+// API Auth
+model User {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  team       String
+  token      String @unique
+  accessType String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }

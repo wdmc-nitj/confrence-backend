@@ -4,7 +4,8 @@ import swaggerUi from 'swagger-ui-express';
 import specs from './config/docs';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import verifyAdmin from './utils/middleware';
+// import verifyAdmin from './utils/middleware';
+import { authenticate } from './utils/middleware';
 // routes import
 
 // import awards from './routes/awards';
@@ -23,7 +24,8 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(verifyAdmin);
+// app.use(verifyAdmin);
+app.use(authenticate());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors);

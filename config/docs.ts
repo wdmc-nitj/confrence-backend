@@ -26,6 +26,7 @@ const options = {
     './routes/home.ts',
     './routes/navbar.ts',
     './routes/sponsors.ts',
+    './routes/user.ts',
   ] // replace this with the path to your API routes
 };
 
