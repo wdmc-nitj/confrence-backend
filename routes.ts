@@ -1,6 +1,6 @@
-import { Router, Request, Response } from 'express';
-import swaggerUi from 'swagger-ui-express';
-import specs from './config/docs';
+import { Router, Request, Response } from "express";
+import swaggerUi from "swagger-ui-express";
+import specs from "./config/docs";
 
 const mainRouter = Router();
 
@@ -18,20 +18,20 @@ import committeesRouter from "./routes/committees";
 import usersRouter from "./routes/user";
 
 // app.use('/awards', awards);
-mainRouter.use('/conf', conf);
+mainRouter.use("/conf", conf);
 // mainRouter.use('/eventDates', eventDate);
-mainRouter.use('/home', home);
-mainRouter.use('/navbar', navbar);
-mainRouter.use('/participant', participant);
+mainRouter.use("/home", home);
+mainRouter.use("/navbar", navbar);
+mainRouter.use("/participant", participant);
 // mainRouter.use('/sponsors', sponsorsRouter);
-mainRouter.use('/speakers', speakersRouter); 
-mainRouter.use('/committees', committeesRouter);
-mainRouter.use('/users', usersRouter);
+mainRouter.use("/speakers", speakersRouter);
+mainRouter.use("/committees", committeesRouter);
+mainRouter.use("/users", usersRouter);
 
-mainRouter.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
+mainRouter.get("/", (req: Request, res: Response) => {
+  res.send("Hello World!");
 });
 
-mainRouter.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+mainRouter.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 export default mainRouter;
