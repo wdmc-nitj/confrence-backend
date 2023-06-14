@@ -1,23 +1,12 @@
-import express, {Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
-import specs from './config/docs';
+
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 // import verifyAdmin from './utils/middleware';
 import { authenticate } from './utils/middleware';
 // routes import
 import mainRouter from './routes';
-// import awards from './routes/awards';
-import conf from './routes/conf';
-// import eventDate from './routes/eventDate';
-import home from './routes/home';
-import navbar from './routes/navbar';
-import participant from './routes/participant';
-// import sponsorsRouter from './routes/sponsors';
-import speakersRouter from './routes/speakers';
-import committeesRouter from './routes/committees';
-import usersRouter from './routes/user'
 
 dotenv.config();
 
@@ -30,24 +19,6 @@ app.use(authenticate());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-
-
-// // app.use('/awards', awards);
-// app.use('/conf', conf);
-// // app.use('/eventDates', eventDate);
-// app.use('/home', home);
-// app.use('/navbar', navbar);
-// app.use('/participant', participant);
-// // app.use('/sponsors', sponsorsRouter);
-// app.use('/speakers', speakersRouter); 
-// app.use('/committees', committeesRouter);
-// app.use('/users', usersRouter);
-
-// app.get('/', (req: Request, res: Response) => {
-//     res.send('Hello World!');
-// });
-
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/', mainRouter);
 
