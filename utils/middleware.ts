@@ -34,7 +34,7 @@ const allowAlwaysRoutes = [
 ];
 
 const adminOnlyRoutes = [
-  /^\/users(?:\/|$)/ // /users and /users/*
+  /^\/users(?:\/|$)/, // /users and /users/*
 ];
 
 const authenticate = () => {
@@ -95,7 +95,6 @@ const authenticate = () => {
   };
 };
 
-
 // Helper function to determine the access type based on the request method
 const determineAccessTypeFromRequestMethod = (method: string) => {
   if (method === "GET") {
@@ -111,10 +110,10 @@ const limiter = rateLimit({
   max: 40, // Maximum number of requests allowed in the time window
   keyGenerator: (req) => {
     // Use the user's token as the rate limiting identifier
-    const userToken = req.headers['authorization'];
-    return userToken || ''; // Return an empty string if no token is present
+    const userToken = req.headers["authorization"];
+    return userToken || ""; // Return an empty string if no token is present
   },
-  message: 'Too many requests, please try again after a few minutes.',
+  message: "Too many requests, please try again after a few minutes.",
 });
 
 export default verifyAdmin;
