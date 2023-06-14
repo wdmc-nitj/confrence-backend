@@ -30,7 +30,7 @@ enum AccessType {
 
 const allowAlwaysRoutes = [
   /^\/$/, // /
-  /^\/api-docs\//, // /api-docs and /api-docs/*
+  /^\/api-docs(?:\/|$)/, // /api-docs and /api-docs/*
 ];
 
 const adminOnlyRoutes = [
