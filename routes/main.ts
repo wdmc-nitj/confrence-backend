@@ -1,21 +1,21 @@
 import { Router, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
-import specs from "./config/docs";
+import specs from "../config/docs";
 
 const mainRouter = Router();
 
 // routes import
 
 // import awards from './routes/awards';
-import conf from "./routes/conf";
+import conf from "./conf";
 // import eventDate from './routes/eventDate';
-import home from "./routes/home";
-import navbar from "./routes/navbar";
-import participant from "./routes/participant";
+import home from "./home";
+import navbar from "./navbar";
+import participant from "./participant";
 // import sponsorsRouter from './routes/sponsors';
-import speakersRouter from "./routes/speakers";
-import committeesRouter from "./routes/committees";
-import usersRouter from "./routes/user";
+import speakersRouter from "./speakers";
+import committeesRouter from "./committees";
+import usersRouter from "./user";
 
 // app.use('/awards', awards);
 mainRouter.use("/conf", conf);

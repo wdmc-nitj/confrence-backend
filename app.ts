@@ -7,7 +7,7 @@ import bodyParser from "body-parser";
 import { authenticate, limiter } from "./utils/middleware";
 
 // routes import
-import mainRouter from "./routes";
+import mainRouter from "./routes/main";
 
 dotenv.config();
 
