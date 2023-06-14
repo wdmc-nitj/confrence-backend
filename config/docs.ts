@@ -1,32 +1,46 @@
-import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerJsdoc from "swagger-jsdoc";
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'WDM API',
-      version: '1.0.0',
-      description: 'API documentation for your Node.js project'
+      title: "Conference API",
+      version: "2.0.0",
+      description: "PiXel Perfect Hackathon",
     },
     servers: [
       {
-        url: 'http://localhost:8000',
-        description: 'Development server'
-
+        url: "http://localhost:8000",
+        description: "Development server",
       },
       {
-        url:'',
-        description: 'Production server'
-      }
-    ]
+        url: "https://conference.cyclic.app",
+        description: "Production server",
+      },
+    ],
+    components: {
+      securitySchemes: {
+        APIKeyAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+        },
+      },
+    },
+    security: [
+      {
+        APIKeyAuth: [],
+      },
+    ],
   },
   apis: [
-    './routes/awards.ts',
-    './routes/eventDate.ts',
-    './routes/home.ts',
-    './routes/navbar.ts',
-    './routes/sponsors.ts',
-  ] // replace this with the path to your API routes
+    "./routes/awards.ts",
+    "./routes/eventDate.ts",
+    "./routes/home.ts",
+    "./routes/navbar.ts",
+    "./routes/sponsors.ts",
+    "./routes/user.ts",
+  ],
 };
 
 const specs = swaggerJsdoc(options);
