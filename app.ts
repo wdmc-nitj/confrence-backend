@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 // import verifyAdmin from './utils/middleware';
 import { authenticate } from './utils/middleware';
 // routes import
-
+import mainRouter from './routes';
 // import awards from './routes/awards';
 import conf from './routes/conf';
 // import eventDate from './routes/eventDate';
@@ -32,22 +32,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 
-// app.use('/awards', awards);
-app.use('/conf', conf);
-// app.use('/eventDates', eventDate);
-app.use('/home', home);
-app.use('/navbar', navbar);
-app.use('/participant', participant);
-// app.use('/sponsors', sponsorsRouter);
-app.use('/speakers', speakersRouter); 
-app.use('/committees', committeesRouter);
-app.use('/users', usersRouter);
+// // app.use('/awards', awards);
+// app.use('/conf', conf);
+// // app.use('/eventDates', eventDate);
+// app.use('/home', home);
+// app.use('/navbar', navbar);
+// app.use('/participant', participant);
+// // app.use('/sponsors', sponsorsRouter);
+// app.use('/speakers', speakersRouter); 
+// app.use('/committees', committeesRouter);
+// app.use('/users', usersRouter);
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-});
+// app.get('/', (req: Request, res: Response) => {
+//     res.send('Hello World!');
+// });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+app.use('/', mainRouter);
 
 
 const PORT = process.env.PORT || 3000;
