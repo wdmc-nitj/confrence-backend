@@ -28,9 +28,11 @@ mainRouter.use("/speakers", speakersRouter);
 mainRouter.use("/committees", committeesRouter);
 mainRouter.use("/users", usersRouter);
 
-mainRouter.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
+// mainRouter.get("/", (req: Request, res: Response) => {
+//   res.send("Hello World!");
+// });
+
+mainRouter.get("/", swaggerUi.serve, swaggerUi.setup(specs));
 
 mainRouter.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
