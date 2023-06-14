@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import prisma from "../config/client";
+import rateLimit from "express-rate-limit";
 
 const verifyAdmin = (req: Request, res: Response, next: NextFunction) => {
   if (req.method === "GET") next();
@@ -104,5 +105,17 @@ const determineAccessTypeFromRequestMethod = (method: string) => {
   }
 };
 
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minutes
+  max: 40, // Maximum number of requests allowed in the time window
+  keyGenerator: (req) => {
+    // Use the user's token as the rate limiting identifier
+    const userToken = req.headers['authorization'];
+    return userToken || ''; // Return an empty string if no token is present
+  },
+  message: 'Too many requests, please try again after a few minutes.',
+});
+
 export default verifyAdmin;
-export { authenticate, AccessType };
+export { authenticate, AccessType, limiter };

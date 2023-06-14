@@ -4,7 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 // import verifyAdmin from './utils/middleware';
-import { authenticate } from "./utils/middleware";
+import { authenticate, limiter } from "./utils/middleware";
+
 // routes import
 import mainRouter from "./routes";
 
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use("/", mainRouter);
+app.use("/", limiter, mainRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
