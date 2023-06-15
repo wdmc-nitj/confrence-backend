@@ -31,7 +31,7 @@ export default class AwardsController {
   async getAwardById(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const award = await prisma.awards.findUnique({ where: { id } });
+      const award = await prisma.awards.findFirst({ where: { id } });
       if (award) {
         res.json(award);
       } else {
@@ -60,7 +60,7 @@ export default class AwardsController {
     const { id } = req.params;
     const updatedAward: awardsModel = req.body;
     try {
-      const award = await prisma.awards.findUnique({ where: { id } });
+      const award = await prisma.awards.findFirst({ where: { id } });
       if (award) {
         const updated = await prisma.awards.update({
           where: { id },
@@ -79,7 +79,7 @@ export default class AwardsController {
   async deleteAward(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const award = await prisma.awards.findUnique({ where: { id } });
+      const award = await prisma.awards.findFirst({ where: { id } });
       if (award) {
         const deleted = await prisma.awards.delete({ where: { id } });
         res.json(deleted);

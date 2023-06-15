@@ -37,7 +37,7 @@ export default class EventDateController {
     async getEventDateById(req: Request, res: Response) {
         const { id } = req.params;
         try {
-            const eventDate = await prisma.eventDates.findUnique({
+            const eventDate = await prisma.eventDates.findFirst({
                 where: { id },
             });
             if (eventDate) {
@@ -74,7 +74,7 @@ export default class EventDateController {
         const { id } = req.params;
         const updatedEventDate: EventDates = req.body;
         try {
-            const eventDate = await prisma.eventDates.findUnique({
+            const eventDate = await prisma.eventDates.findFirst({
                 where: { id },
             });
             if (eventDate) {
@@ -98,7 +98,7 @@ export default class EventDateController {
     async deleteEventDate(req: Request, res: Response) {
         const { id } = req.params;
         try {
-            const eventDate = await prisma.eventDates.findUnique({
+            const eventDate = await prisma.eventDates.findFirst({
                 where: { id },
             });
             if (eventDate) {

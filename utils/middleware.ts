@@ -52,7 +52,7 @@ const authenticate = () => {
       }
 
       // Retrieve the user from the database based on the provided token
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: { token: userToken },
       });
 
