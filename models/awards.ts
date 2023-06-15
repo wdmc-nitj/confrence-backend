@@ -1,6 +1,6 @@
 export default interface awards {
   confId: string;
-  Title1: string;
+  title1: string;
   title2: string;
   description: string;
   sequence: number;

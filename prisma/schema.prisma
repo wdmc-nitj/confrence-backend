@@ -106,7 +106,7 @@ model Awards {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   confId      String    @db.ObjectId
   conf        Confrence @relation(fields: [confId], references: [id])
-  Title1      String
+  title1      String
   title2      String?
   description String?
   sequence    Int       @default(0)
