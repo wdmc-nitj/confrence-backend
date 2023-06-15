@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import EventDates from '../models/eventDate';
+import EventDates from '../models/EventDate';
 import prisma from '../config/client';
 import HttpException from '../models/http-exception';
 
