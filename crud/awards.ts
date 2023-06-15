@@ -9,7 +9,7 @@ export default class AwardsController {
     const { id } = req.params;
     try {
       const awards = await prisma.awards.findMany({
-        where: { ConfId: id },
+        where: { confId: id },
       });
       res.json(awards);
     } catch (error: any) {

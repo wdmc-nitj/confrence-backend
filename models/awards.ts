@@ -1,5 +1,5 @@
 export default interface awards {
-  ConfId: string;
+  confId: string;
   Title1: string;
   title2: string;
   description: string;

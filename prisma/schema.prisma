@@ -49,8 +49,8 @@ model Home {
 
 model EventDates {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
+  confId    String    @db.ObjectId
+  conf      Confrence @relation(fields: [confId], references: [id])
   title     String?
   sequence  Int       @default(0)
   extended  Boolean   @default(false)
@@ -91,8 +91,8 @@ model Images {
 
 model Sponsors {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
+  confId    String    @db.ObjectId
+  conf      Confrence @relation(fields: [confId], references: [id])
   name      String
   type      String
   logo      String?
@@ -104,8 +104,8 @@ model Sponsors {
 
 model Awards {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
+  confId      String    @db.ObjectId
+  conf        Confrence @relation(fields: [confId], references: [id])
   Title1      String
   title2      String?
   description String?

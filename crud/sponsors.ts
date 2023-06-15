@@ -9,7 +9,7 @@ export default class SponsorsController {
         const { id } = req.params;
         try {
             const sponsors = await prisma.sponsors.findMany({
-                where: { ConfId: id },
+                where: { confId: id },
             });
             res.json(sponsors);
         } catch (error: any) {

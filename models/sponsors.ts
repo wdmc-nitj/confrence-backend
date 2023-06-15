@@ -1,5 +1,5 @@
 export default interface sponsors {
-    ConfId: string;
+    confId: string;
     name: string;
     type: string;
     logo: string;

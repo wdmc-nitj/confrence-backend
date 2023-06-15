@@ -9,7 +9,7 @@ export default class EventDateController {
         const { id } = req.params;
         try {
             const eventDates = await prisma.eventDates.findMany({
-                where: { ConfId: id },
+                where: { confId: id },
             });
             res.json(eventDates);
         } catch (error: any) {
