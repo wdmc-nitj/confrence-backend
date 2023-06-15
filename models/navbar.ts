@@ -1,7 +1,7 @@
 export default interface Navbar{
-  ConfId: string;
+  confId: string;
   heading: string;
-  subheading: string;
+  subHeading: string;
   link: string;
   url: string;
   name: string;
