@@ -6,26 +6,29 @@ const mainRouter = Router();
 
 // routes import
 
-// import awards from './routes/awards';
+import awardsRouter from "./awards";
+import committeesRouter from "./committees";
 import conf from "./conf";
-// import eventDate from './routes/eventDate';
+import eventDateRouter from "./eventDate";
 import home from "./home";
 import navbar from "./navbar";
 import participant from "./participant";
-// import sponsorsRouter from './routes/sponsors';
 import speakersRouter from "./speakers";
-import committeesRouter from "./committees";
+import sponsorsRouter from "./sponsors";
 import usersRouter from "./user";
 
-// app.use('/awards', awards);
+// crud approach
 mainRouter.use("/conf", conf);
-// mainRouter.use('/eventDates', eventDate);
 mainRouter.use("/home", home);
 mainRouter.use("/navbar", navbar);
 mainRouter.use("/participant", participant);
-// mainRouter.use('/sponsors', sponsorsRouter);
-mainRouter.use("/speakers", speakersRouter);
+
+// controller approach
+mainRouter.use("/awards", awardsRouter);
 mainRouter.use("/committees", committeesRouter);
+mainRouter.use("/eventDates", eventDateRouter);
+mainRouter.use("/speakers", speakersRouter);
+mainRouter.use("/sponsors", sponsorsRouter);
 mainRouter.use("/users", usersRouter);
 
 mainRouter.get("/", (req: Request, res: Response) => {

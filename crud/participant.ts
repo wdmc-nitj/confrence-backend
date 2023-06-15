@@ -33,13 +33,16 @@ export default class participantController {
 
   async getParticipantByConfId(id: string) {
     try {
-      return await prisma.participant.findMany({ where: { ConfId: id } });
+      return await prisma.participant.findMany({ where: { confId: id } });
     } catch (e: any) {
       throw new HttpException(500, e?.message || "Internal Server Error");
     }
   }
 
   async updateParticipant(participant: participant, id: string) {
+    if (!id) {
+      throw new HttpException(400, "Invalid Id");
+    }
     try {
       await prisma.participant.update({
         where: { id: id },

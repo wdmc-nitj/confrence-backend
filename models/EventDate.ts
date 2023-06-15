@@ -1,5 +1,5 @@
 export default interface EventDate {
-    ConfId: string;
+    confId: string;
     title: string;
     sequence: number;
     extended: boolean;
