@@ -4,9 +4,10 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "WDM API",
+
+      title: "Conference API",
       version: "2.0.0",
-      description: "API documentation for your Node.js project",
+      description: "PiXel Perfect Hackathon",
     },
     servers: [
       {
@@ -14,12 +15,34 @@ const options = {
         description: "Development server",
       },
       {
-        url: "",
+        url: "https://conference.cyclic.app",
         description: "Production server",
       },
     ],
+    components: {
+      securitySchemes: {
+        APIKeyAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+        },
+      },
+    },
+    security: [
+      {
+        APIKeyAuth: [],
+      },
+    ],
   },
-  apis: ["./routes/home.ts", "./routes/images.ts"], // replace this with the path to your API routes
+  apis: [
+    "./routes/awards.ts",
+    "./routes/eventDate.ts",
+    "./routes/home.ts",
+    "./routes/navbar.ts",
+    "./routes/sponsors.ts",
+    "./routes/user.ts",
+    "./routes/conf.ts",
+  ],
 };
 
 const specs = swaggerJsdoc(options);

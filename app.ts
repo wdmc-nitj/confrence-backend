@@ -1,35 +1,27 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
-import swaggerUi from "swagger-ui-express";
-import specs from "./config/docs";
-import dotenv from "dotenv";
-import verifyAdmin from "./utils/middleware";
-// routes import
 
-import conf from "./routes/conf";
-import home from "./routes/home";
-import images from "./routes/images";
-import contactUs from "./routes/contactUs";
+import dotenv from "dotenv";
+import bodyParser from "body-parser";
+// import verifyAdmin from './utils/middleware';
+import { authenticate, limiter } from "./utils/middleware";
+
+// routes import
+import mainRouter from "./routes/main";
 
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(verifyAdmin);
+// app.use(verifyAdmin);
+app.use(authenticate());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use("/conf", conf);
-app.use("/home", home);
-app.use("/images", images);
-app.use("/contact-us", contactUs);
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+app.use("/", limiter, mainRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

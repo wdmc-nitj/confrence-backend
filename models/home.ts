@@ -1,12 +1,12 @@
 export default interface home {
-  ConfId: string;
-  ConfName: string;
-  ConfstartDate: Date;
-  ConfendDate: Date;
-  AboutConf: string;
-  AboutIns: string;
-  YoutubeLink: string;
-  InstaLink: string;
-  FacebookLink: string;
-  TwitterLink: string;
+  confId: string;
+  confName: string;
+  confStartDate: Date;
+  confEndDate: Date;
+  aboutConf: string;
+  aboutIns: string;
+  youtubeLink: string;
+  instaLink: string;
+  facebookLink: string;
+  twitterLink: string;
 }

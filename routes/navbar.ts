@@ -1,93 +1,100 @@
-import express from "express";
-import { Request, Response } from "express";
-import home from "../models/home";
-
-import HomeController from "../crud/home";
+import express, { Request, Response } from "express";
+import NavbarController from "../crud/navbar";
+import Navbar from "../models/navbar";
 
 const router = express.Router();
-const homeController = new HomeController();
+const Navbar = new NavbarController();
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const home = await homeController.getHome();
-    res.status(200).json(home);
-  } 
-  catch (e:any) {
-    console.error("Error home items:", e);
+    const navbarItems = await Navbar.getNavbar();
+    res.status(200).json(navbarItems);
+  } catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
 
+
 router.get("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
-    const home = await homeController.getHomeById(req.params.id);
-    res.status(200).json(home);
+    const navbarItem = await Navbar.getNavbarById(id);
+    res.status(200).json(navbarItem);
   } 
   catch (e:any) {
-    console.error("Error home items:", e);
+    console.error("Error retrieving navbar items:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
 
 router.get("/conf/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
-    const home = await homeController.getHomeByConfId(req.params.id);
-    res.status(200).json(home);
-  } catch (e:any) {
-    console.error("Error home items:", e);
+    const navbarItem = await Navbar.getNavbarByConfId(id);
+    res.status(200).json(navbarItem);
+  } 
+  catch (e:any) {
+    console.error("Error retrieving navbar items:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const home: home = req.body;
-    await homeController.addHome(home);
-    res.status(201).json({ response: "Home Added Successfully" });
-  }catch (e:any) {
-    console.error("Error home items:", e);
+    const navbarItem:Navbar = req.body;
+    await Navbar.addNavbar(navbarItem);
+    res.status(201).json({ success: "Navbar item added successfully" });
+  } catch (e:any) {
+    console.error("Error adding navbar item:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
+
 
 router.put("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
-    const home: home = req.body;
-    await homeController.updateHome(home, req.params.id);
-    res.status(200).json({ response: "Home Updated Successfully" });
+    const navbarItem:Navbar = req.body;
+    await Navbar.updateNavbar(navbarItem, id);
+    res.status(200).json({ success: "Navbar item updated successfully" });
   } catch (e:any) {
-    console.error("Error home items:", e);
+    console.error("Error retrieving navbar items:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
+
 
 router.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
   try {
-    await homeController.deleteHome(req.params.id);
-    res.status(200).json({ response: "Home Deleted Successfully" });
+    await Navbar.deleteNavbar(id);
+    res.status(200).json({ success: "Navbar item deleted successfully" });
   } catch (e:any) {
-    console.error("Error home items:", e);
+    console.error("Error retrieving navbar items:", e);
     res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
   }
 });
 
+
 export default router;
+
 
 
 /**
  * @swagger
  * tags:
- *   name: Home
- *   description: API endpoints for Home
+ *   name: Navbar
+ *   description: API endpoints for Navbar
  */
 
 
 /**
  * @swagger 
- * /home:
+ * /navbar:
  *  get:
- *    tags: [Home]
- *    description: Get all Home
+ *    tags: [Navbar]
+ *    description: Get all Navbars
  *    responses:
  *      200:
  *        description: Success response
@@ -96,7 +103,7 @@ export default router;
  *              schema:
  *                type: array
  *                items:
- *                  $ref: '#/components/schemas/Home'
+ *                  $ref: '#/components/schemas/Navbar'
  *      500:
  *       description: Internal server error 
  *       content:
@@ -104,15 +111,15 @@ export default router;
  *            schema:
  *              $ref: '#/components/schemas/Error'
  *  post:
- *    tags: [Home]
- *    summary: Create a new Home
- *    description: Create a new Home
+ *    tags: [Navbar]
+ *    summary: Create a new Navbar
+ *    description: Create a new Navbar
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/HomeModel'
+ *            $ref: '#/components/schemas/NavbarModel'
  *    responses:
  *     201:
  *      description: success response
@@ -139,15 +146,15 @@ export default router;
 
 /**
  * @swagger
- * /home/{id}:
+ * /navbar/{id}:
  *   get:
- *    tags: [Home]
- *    description: Get Home By Id
- *    summary: Get Home By Id
+ *    tags: [Navbar]
+ *    description: Get Navbar By Id
+ *    summary: Get Navbar By Id
  *    parameters:
  *      - name: id
  *        in: path
- *        description: Home Id
+ *        description: Navbar Id
  *        required: true
  *        schema:
  *         type: string
@@ -157,7 +164,7 @@ export default router;
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Home'
+ *              $ref: '#/components/schemas/Navbar'
  *      500:
  *        description: Internal server error
  *        content:
@@ -171,13 +178,13 @@ export default router;
  *            schema:
  *              $ref: '#/components/schemas/Error'
  *   put:
- *    tags: [Home]
- *    summary: Update Home
- *    description: Update Home
+ *    tags: [Navbar]
+ *    summary: Update Navbar
+ *    description: Update Navbar
  *    parameters:
  *        - name: id
  *          in: path
- *          description: Home Id
+ *          description: Navbar Id
  *          required: true
  *          schema:
  *            type: string  
@@ -186,7 +193,7 @@ export default router;
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Home'
+ *            $ref: '#/components/schemas/Navbar'
  *    responses:
  *     200:
  *      description: Success
@@ -207,13 +214,13 @@ export default router;
  *            schema:
  *              $ref: '#/components/schemas/Error'
  *   delete:
- *    tags: [Home]
- *    summary: Delete Home
- *    description: Delete Home
+ *    tags: [Navbar]
+ *    summary: Delete Navbar
+ *    description: Delete Navbar
  *    parameters:
  *     - name: id
  *       in: path
- *       description: Home Id
+ *       description: Navbar Id
  *       required: true
  *       schema:
  *         type: string
@@ -242,15 +249,15 @@ export default router;
 
 /**
  * @swagger
- * /home/conf/{id}:
+ * /navbar/conf/{id}:
  *   get:
- *    tags: [Home]
- *    description: Get Home By confrence Id
- *    summary: Get Home By confrence Id
+ *    tags: [Navbar]
+ *    description: Get Navbar By confrence Id
+ *    summary: Get Navbar By confrence Id
  *    parameters:
  *      - name: id
  *        in: path
- *        description: Home Id
+ *        description: Navbar Id
  *        required: true
  *        schema:
  *         type: string
@@ -260,7 +267,7 @@ export default router;
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Home'
+ *              $ref: '#/components/schemas/Navbar'
  *      500:
  *        description: Internal server error
  *        content:
@@ -281,38 +288,21 @@ export default router;
  * @swagger
  * components:
  *   schemas:
- *     Home:
+ *     Navbar:
  *       type: object
  *       properties:
  *         id:
  *          type: string
  *         confId:
- *           type: string
- *         confName:
- *           type: string
- *         confStartDate:
- *           type: string
- *           format: date-time
- *         confEndDate:
- *            type: string
- *            format: date-time
- *         aboutConf:
- *            type: string
- *         aboutIns:
- *            type: string
- *            nullable: true
- *         youtubeLink:
- *            type: string
- *            nullable: true
- *         instaLink:
- *            type: string
- *            nullable: true
- *         facebookLink:
- *            type: string
- *            nullable: true
- *         twitterLink:
- *            type: string
- *            nullable: true
+ *          type: string
+ *         heading:
+ *          type: string
+ *         subHeading:
+ *          type: string
+ *         name:
+ *          type: string
+ *         url:
+ *          type: string 
  *         createdAt:
  *            type: string
  *            format: date-time
@@ -329,35 +319,17 @@ export default router;
  *        properties:
  *          success:
  *            type: string
- *     HomeModel:
+ *     NavbarModel:
  *        type: object
  *        properties:
  *          confId:
- *            type: string
- *          confName:
- *            type: string
- *          confStartDate:
- *            type: string
- *            format: date-time
- *          confEndDate:
- *            type: string
- *            format: date-time
- *          aboutConf:
- *            type: string
- *          aboutIns:
- *            type: string
- *            nullable: true
- *          youtubeLink:
- *            type: string
- *            nullable: true
- *          instaLink:
- *            type: string
- *            nullable: true
- *          facebookLink:
- *            type: string
- *            nullable: true
- *          twitterLink:
- *            type: string
- *            nullable: true
+ *           type: string
+ *          heading:
+ *           type: string
+ *          subHeading:
+ *           type: string
+ *          name:
+ *           type: string
+ *          url:
+ *           type: string 
  */
-
