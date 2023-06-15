@@ -25,7 +25,7 @@ export default class ConfController {
         }
     
         try{
-            return await prisma.confrence.findUnique({where:{id:id}});
+            return await prisma.confrence.findFirst({where:{id:id}});
         }
         catch(e: any){
             throw new HttpException(500,e?.message || "Internal Server Error");
@@ -42,13 +42,13 @@ export default class ConfController {
         }
     }
     
-    async updateConf(conf:conf){
+    async updateConf(conf:conf,id:string){
         if(!conf.email || !conf.email.includes("@")){
             throw new HttpException(400,"Invalid Email");
         }
     
         try{
-            await prisma.confrence.update({where:{email:conf.email},data:conf});
+            await prisma.confrence.update({where:{id:id},data:conf});
         }
         catch(e: any){
             throw new HttpException(500,e?.message || "Internal Server Error");

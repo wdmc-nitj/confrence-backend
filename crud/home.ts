@@ -17,7 +17,7 @@ export default class HomeController {
         }
 
         try {
-            return await prisma.home.findFirst({ where: { ConfId: id } });
+            return await prisma.home.findFirst({ where: { confId: id } });
         } catch (e: any) {
             throw new HttpException(500, e?.message || "Internal Server Error");
         }
@@ -44,6 +44,10 @@ export default class HomeController {
     }
 
     async updateHome(home: Home, id: string) {
+        if (!id) {
+            throw new HttpException(400, "Invalid Id");
+        }
+        
         try {
             await prisma.home.update({ where: { id: id }, data: home });
         } catch (e: any) {

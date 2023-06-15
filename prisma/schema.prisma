@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
@@ -13,11 +13,13 @@ datasource db {
 
 model Confrence {
   id          String         @id @default(auto()) @map("_id") @db.ObjectId
-  email       String        @unique
+  email       String         @unique
   name        String?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @default(now()) @updatedAt
-  Home        Home[]
+  Home        Home?
+  Navbar      Navbar?
+  Participant Participant[]
   EventDates  EventDates[]
   Annoucement Announcement[]
   Images      Images[]
@@ -30,17 +32,17 @@ model Confrence {
 
 model Home {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId        String    @db.ObjectId @unique
-  Conf          Confrence @relation(fields: [ConfId], references: [id])
-  ConfName      String
-  ConfstartDate DateTime
-  ConfendDate   DateTime
-  AboutConf     String
-  AboutIns      String?
-  YoutubeLink   String?
-  InstaLink     String?
-  FacebookLink  String?
-  TwitterLink   String?
+  confId        String    @unique @db.ObjectId
+  conf          Confrence @relation(fields: [confId], references: [id])
+  confName      String
+  confStartDate DateTime
+  confEndDate   DateTime
+  aboutConf     String
+  aboutIns      String?
+  youtubeLink   String?
+  instaLink     String?
+  facebookLink  String?
+  twitterLink   String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now()) @updatedAt
 }
@@ -54,7 +56,7 @@ model EventDates {
   extended  Boolean   @default(false)
   newDate   DateTime?
   completed Boolean   @default(false)
-  featured   Boolean   @default(true)
+  featured  Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -95,7 +97,7 @@ model Sponsors {
   type      String
   logo      String?
   sequence  Int       @default(0)
-  featured   Boolean   @default(true)
+  featured  Boolean   @default(true)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
 }
@@ -108,7 +110,7 @@ model Awards {
   title2      String?
   description String?
   sequence    Int       @default(0)
-  featured     Boolean   @default(true)
+  featured    Boolean   @default(true)
   new         Boolean   @default(true)
   hidden      Boolean   @default(false)
   link        String?
@@ -186,35 +188,37 @@ model Certificate {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-model participant {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId            String   @db.ObjectId
-  AuthorName        String
-  AuthorDesignation String
-  AuthorInstitute   String
-  PaperTitle        String
-  PaperId           String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @default(now()) @updatedAt
+model Participant {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  confId            String    @db.ObjectId
+  conf              Confrence @relation(fields: [confId], references: [id])
+  authorName        String
+  authorDesignation String
+  authorInstitute   String
+  paperTitle        String
+  paperId           String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @default(now()) @updatedAt
 }
 
 model Navbar {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId     String   @db.ObjectId
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  confId     String    @unique @db.ObjectId
+  conf       Confrence @relation(fields: [confId], references: [id])
   heading    String
-  subheading String
+  subHeading String
   url        String
   name       String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
 }
 
 // API Auth
 model User {
-  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   team       String
-  token      String @unique
+  token      String   @unique
   accessType String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
 }

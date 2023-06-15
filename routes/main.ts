@@ -6,24 +6,21 @@ const mainRouter = Router();
 
 // routes import
 
-// import awards from './routes/awards';
 import conf from "./conf";
-// import eventDate from './routes/eventDate';
 import home from "./home";
 import navbar from "./navbar";
 import participant from "./participant";
-// import sponsorsRouter from './routes/sponsors';
 import speakersRouter from "./speakers";
 import committeesRouter from "./committees";
 import usersRouter from "./user";
 
-// app.use('/awards', awards);
+// crud approach
 mainRouter.use("/conf", conf);
-// mainRouter.use('/eventDates', eventDate);
 mainRouter.use("/home", home);
 mainRouter.use("/navbar", navbar);
 mainRouter.use("/participant", participant);
-// mainRouter.use('/sponsors', sponsorsRouter);
+
+// controller approach
 mainRouter.use("/speakers", speakersRouter);
 mainRouter.use("/committees", committeesRouter);
 mainRouter.use("/users", usersRouter);

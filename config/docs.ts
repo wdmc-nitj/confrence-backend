@@ -40,6 +40,7 @@ const options = {
     "./routes/navbar.ts",
     "./routes/sponsors.ts",
     "./routes/user.ts",
+    "./routes/conf.ts",
   ],
 };
 
