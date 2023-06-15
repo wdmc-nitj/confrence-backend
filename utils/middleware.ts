@@ -52,7 +52,7 @@ const authenticate = () => {
       }
 
       // Retrieve the user from the database based on the provided token
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: { token: userToken },
       });
 
@@ -106,8 +106,8 @@ const determineAccessTypeFromRequestMethod = (method: string) => {
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minutes
-  max: 40, // Maximum number of requests allowed in the time window
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 200, // Maximum number of requests allowed in the time window
   keyGenerator: (req:Request) => {
     // Use the user's token as the rate limiting identifier
     const userToken = req.headers["authorization"];

@@ -9,7 +9,7 @@ export default class SponsorsController {
         const { id } = req.params;
         try {
             const sponsors = await prisma.sponsors.findMany({
-                where: { ConfId: id },
+                where: { confId: id },
             });
             res.json(sponsors);
         } catch (error: any) {
@@ -37,7 +37,7 @@ export default class SponsorsController {
     async getSponsorById(req: Request, res: Response) {
         const { id } = req.params;
         try {
-            const sponsor = await prisma.sponsors.findUnique({ where: { id } });
+            const sponsor = await prisma.sponsors.findFirst({ where: { id } });
             if (sponsor) {
                 res.json(sponsor);
             } else {
@@ -72,7 +72,7 @@ export default class SponsorsController {
         const { id } = req.params;
         const updatedSponsor: sponsorsModel = req.body;
         try {
-            const sponsor = await prisma.sponsors.findUnique({ where: { id } });
+            const sponsor = await prisma.sponsors.findFirst({ where: { id } });
             if (sponsor) {
                 const updated = await prisma.sponsors.update({
                     where: { id },
@@ -94,7 +94,7 @@ export default class SponsorsController {
     async deleteSponsor(req: Request, res: Response) {
         const { id } = req.params;
         try {
-            const sponsor = await prisma.sponsors.findUnique({ where: { id } });
+            const sponsor = await prisma.sponsors.findFirst({ where: { id } });
             if (sponsor) {
                 const deleted = await prisma.sponsors.delete({ where: { id } });
                 res.json(deleted);
