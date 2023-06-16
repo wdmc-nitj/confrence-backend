@@ -158,10 +158,13 @@ export default eventDateRouter;
  *     EventDatesModel:
  *       type: object
  *       properties:
- *         ConfId:
+ *         confId:
  *           type: string
  *         title:
  *           type: string
+ *        date:
+ *          type: string
+ *         format: date-time
  *         sequence:
  *           type: number
  *         extended:
