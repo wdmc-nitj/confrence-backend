@@ -155,7 +155,7 @@ export default awardsRouter;
  *     AwardsModel:
  *       type: object
  *       properties:
- *         ConfId:
+ *         confId:
  *           type: string
  *         title1:
  *           type: string

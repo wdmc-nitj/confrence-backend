@@ -158,7 +158,7 @@ export default sponsorsRouter;
  *     SponsorsModel:
  *       type: object
  *       properties:
- *         ConfId:
+ *         confId:
  *           type: string
  *         name:
  *           type: string
