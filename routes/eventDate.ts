@@ -29,144 +29,20 @@ export default eventDateRouter;
 
 /**
  * @swagger
- * tags:
- *   name: EventDates
- *   description: API endpoints for Event Dates
- */
-
-/**
- * @swagger
- * /eventDates/conference/{id}:
- *   get:
- *     summary: Get event dates by conference ID
- *     tags: [EventDates]
- *     description: Retrieve event dates based on the conference ID
- *     parameters:
- *       - name: id
- *         in: path
- *         description: Conference ID
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Event dates not found
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /eventDates:
- *   get:
- *     tags: [EventDates]
- *     summary: Get all event dates
- *     description: Retrieve all event dates
- *     responses:
- *       200:
- *         description: Success
- *       500:
- *         description: Internal server error
- *   post:
- *     tags: [EventDates]
- *     summary: Create a new event date
- *     description: Create a new event date
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/EventDatesModel'
- *     responses:
- *       200:
- *         description: Success
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
- * /eventDates/{id}:
- *   get:
- *     tags: [EventDates]
- *     summary: Get an event date by ID
- *     description: Retrieve an event date by its ID
- *     parameters:
- *       - name: id
- *         in: path
- *         description: Event date ID
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Event date not found
- *       500:
- *         description: Internal server error
- *   put:
- *     tags: [EventDates]
- *     summary: Update an event date by ID
- *     description: Update an event date by its ID
- *     parameters:
- *       - name: id
- *         in: path
- *         description: Event date ID
- *         required: true
- *         schema:
- *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/EventDatesModel'
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Event date not found
- *       500:
- *         description: Internal server error
- *   delete:
- *     tags: [EventDates]
- *     summary: Delete an event date by ID
- *     description: Delete an event date by its ID
- *     parameters:
- *       - name: id
- *         in: path
- *         description: Event date ID
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Event date not found
- *       500:
- *         description: Internal server error
- */
-
-/**
- * @swagger
  * components:
  *   schemas:
- *     EventDatesModel:
+ *     EventDate:
  *       type: object
  *       properties:
  *         confId:
  *           type: string
  *         title:
  *           type: string
- *        date:
- *          type: string
- *         format: date-time
+ *         date:
+ *           type: string
+ *           format: date-time
  *         sequence:
- *           type: number
+ *           type: integer
  *         extended:
  *           type: boolean
  *         newDate:
@@ -176,4 +52,159 @@ export default eventDateRouter;
  *           type: boolean
  *         featured:
  *           type: boolean
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: EventDates
+ *   description: API endpoints for managing event dates
+ */
+
+/**
+ * @swagger
+ * /eventDates/conference/{id}:
+ *   get:
+ *     summary: Get event dates by conference ID
+ *     tags: [EventDates]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the conference
+ *     responses:
+ *       200:
+ *         description: List of event dates
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EventDate'
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /eventDates:
+ *   get:
+ *     summary: Get all event dates
+ *     tags: [EventDates]
+ *     responses:
+ *       200:
+ *         description: List of event dates
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/EventDate'
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /eventDates/{id}:
+ *   get:
+ *     summary: Get an event date by ID
+ *     tags: [EventDates]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the event date
+ *     responses:
+ *       200:
+ *         description: The requested event date
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EventDate'
+ *       404:
+ *         description: Event date not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /eventDates:
+ *   post:
+ *     summary: Create a new event date
+ *     tags: [EventDates]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/EventDate'
+ *     responses:
+ *       200:
+ *         description: The created event date
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EventDate'
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /eventDates/{id}:
+ *   put:
+ *     summary: Update an event date by ID
+ *     tags: [EventDates]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the event date
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/EventDate'
+ *     responses:
+ *       200:
+ *         description: The updated event date
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EventDate'
+ *       404:
+ *         description: Event date not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /eventDates/{id}:
+ *   delete:
+ *     summary: Delete an event date by ID
+ *     tags: [EventDates]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the event date
+ *     responses:
+ *       200:
+ *         description: Event date deleted successfully
+ *       404:
+ *         description: Event date not found
+ *       500:
+ *         description: Internal server error
  */
