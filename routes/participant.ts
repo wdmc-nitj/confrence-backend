@@ -13,7 +13,7 @@ router.get('/', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 
@@ -25,7 +25,7 @@ router.get('/:id', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 
@@ -37,7 +37,7 @@ router.get('/conf/:id', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 
@@ -49,7 +49,7 @@ router.post('/', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 
@@ -61,7 +61,7 @@ router.put('/:id', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 
@@ -72,7 +72,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
     } 
     catch (e:any) {
         console.error("Error participant items:", e);
-        res.status(500).json({ error: e?.message || "Internal server error" });
+        res.status(e?.code || 500).json({ error: e?.message || "Internal server error" });
       }
 });
 

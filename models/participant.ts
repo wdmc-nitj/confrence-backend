@@ -1,8 +1,8 @@
 export default interface participant {
-  ConfId: string;
-  AuthorName: string;
-  AuthorDesignation: string;
-  AuthorInstitute: string;
-  PaperTitle: string;
-  PaperId: string;
+  confId: string;
+  authorName: string;
+  authorDesignation: string;
+  authorInstitute: string;
+  paperTitle: string;
+  paperId: string;
 }

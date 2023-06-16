@@ -35,7 +35,7 @@ export default class User {
     const userId = req.params.id;
 
     try {
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findFirst({
         where: {
           id: userId,
         },

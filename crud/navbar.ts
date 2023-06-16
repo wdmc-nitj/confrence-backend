@@ -29,7 +29,7 @@ export default class NavbarController {
     }
 
     try {
-      return await prisma.navbar.findFirst({ where: { ConfId: id } });
+      return await prisma.navbar.findFirst({ where: { confId: id } });
     } catch (e: any) {
       throw new HttpException(500, e?.message || "Internal Server Error");
     }
@@ -44,6 +44,10 @@ export default class NavbarController {
   }
 
   async updateNavbar(navbar: Navbar, id: string) {
+    if (!id) {
+      throw new HttpException(400, "Invalid Id");
+    }
+    
     try {
       await prisma.navbar.update({ where: { id: id }, data: navbar });
     } catch (e: any) {
