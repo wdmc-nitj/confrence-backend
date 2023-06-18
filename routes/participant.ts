@@ -250,7 +250,7 @@ export default router;
  *    parameters:
  *      - name: id
  *        in: path
- *        description: Participant ID
+ *        description: Confrence ID
  *        required: true
  *        schema:
  *          type: string
