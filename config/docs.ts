@@ -42,6 +42,9 @@ const options = {
     "./routes/sponsors.ts",
     "./routes/user.ts",
   ],
+  swaggerOptions: {
+    docExpansion: "none",
+  },
 };
 
 const specs = swaggerJsdoc(options);
