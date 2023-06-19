@@ -9,4 +9,6 @@ export default interface home {
   instaLink: string;
   facebookLink: string;
   twitterLink: string;
+  logo: string;
+  shortName: string;
 }
