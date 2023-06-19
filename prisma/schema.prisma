@@ -37,6 +37,8 @@ model Home {
   confName      String
   confStartDate DateTime
   confEndDate   DateTime
+  logo          String?
+  shortName     String?
   aboutConf     String
   aboutIns      String?
   youtubeLink   String?
