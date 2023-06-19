@@ -31,6 +31,7 @@ enum AccessType {
 const allowAlwaysRoutes = [
   /^\/$/, // /
   /^\/api-docs(?:\/|$)/, // /api-docs and /api-docs/*
+  /^\/favicon.ico$/, // /favicon.ico
 ];
 
 const adminOnlyRoutes = [
@@ -106,8 +107,8 @@ const determineAccessTypeFromRequestMethod = (method: string) => {
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 200, // Maximum number of requests allowed in the time window
+  windowMs: 20 * 60 * 1000, // 20 minutes
+  max: 800, // Maximum number of requests allowed in the time window
   keyGenerator: (req:Request) => {
     // Use the user's token as the rate limiting identifier
     const userToken = req.headers["authorization"];
