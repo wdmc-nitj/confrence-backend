@@ -45,6 +45,12 @@ const options = {
   ],
 };
 
+// Swagger UI options to minimize menus
+const swaggerUiOptions = {
+  docExpansion: "none",
+};
+
 const specs = swaggerJsdoc(options);
 
 export default specs;
+export { swaggerUiOptions };

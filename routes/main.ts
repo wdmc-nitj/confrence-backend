@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import swaggerUi from "swagger-ui-express";
-import specs from "../config/docs";
+import specs, { swaggerUiOptions } from "../config/docs";
 
 const mainRouter = Router();
 
@@ -35,6 +35,10 @@ mainRouter.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-mainRouter.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+mainRouter.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, { swaggerOptions: swaggerUiOptions })
+);
 
 export default mainRouter;
