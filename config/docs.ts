@@ -4,6 +4,10 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
+
+      title: "Conference API",
+      version: "2.0.0",
+      description: "PiXel Perfect Hackathon",
       title: 'Conference API',
       version: '2.0.0',
       description: 'PiXel Perfect Hackathon',
@@ -42,7 +46,6 @@ const options = {
     './routes/sponsors.ts',
     './routes/user.ts',
   ],
-}
 
 // Swagger UI options to minimize menus
 const swaggerUiOptions = {
