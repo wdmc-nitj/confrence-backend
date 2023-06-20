@@ -250,7 +250,7 @@ export default router;
  *    parameters:
  *      - name: id
  *        in: path
- *        description: Participant ID
+ *        description: Confrence ID
  *        required: true
  *        schema:
  *          type: string
@@ -260,7 +260,9 @@ export default router;
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Participant'
+ *              type: array
+ *              items:
+ *                  $ref: '#/components/schemas/Participant'
  *      400:
  *        description: Bad Request
  *        content:

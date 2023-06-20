@@ -1,14 +1,11 @@
-import Conference from "./conf";
-
 export default interface Announcement {
-  ConfId: string;
-  Conf: Conference;
-  Title: string;
-  MetaDescription?: string;
-  Description: string;
+  confId: string;
+  title: string;
+  metaDescription?: string;
+  description: string;
   feature: boolean;
   sequence: number;
-  New: boolean;
+  new: boolean;
   hidden: boolean;
-  Link?: string;
+  link?: string;
 }

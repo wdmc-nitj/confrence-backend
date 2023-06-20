@@ -16,12 +16,15 @@ import participant from "./participant";
 import speakersRouter from "./speakers";
 import sponsorsRouter from "./sponsors";
 import usersRouter from "./user";
+import annoucmentRouter from "./announcement";
 
 // crud approach
 mainRouter.use("/conf", conf);
 mainRouter.use("/home", home);
 mainRouter.use("/navbar", navbar);
 mainRouter.use("/participant", participant);
+mainRouter.use("/announcement", annoucmentRouter);
+
 
 // controller approach
 mainRouter.use("/awards", awardsRouter);

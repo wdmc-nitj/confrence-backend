@@ -66,16 +66,16 @@ model EventDates {
 
 model Announcement {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId          String    @db.ObjectId
-  Conf            Confrence @relation(fields: [ConfId], references: [id])
-  Title           String
-  MetaDescription String?
-  Description     String
+  confId          String    @db.ObjectId
+  conf            Confrence @relation(fields: [confId], references: [id])
+  title           String
+  metaDescription String?
+  description     String
   feature         Boolean   @default(true)
   sequence        Int       @default(0)
-  New             Boolean   @default(true)
+  new             Boolean   @default(true)
   hidden          Boolean   @default(false)
-  Link            String?
+  link            String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now()) @updatedAt
 }
