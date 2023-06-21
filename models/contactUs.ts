@@ -12,8 +12,6 @@ export default interface ContactUs {
   fax?: string;
   feature: boolean;
   sequence: number;
-  locationDes?: string;
-  locatinLink?: string;
   createdAt: Date;
   updatedAt: Date;
 }
