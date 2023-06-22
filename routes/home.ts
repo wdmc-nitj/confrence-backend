@@ -312,6 +312,12 @@ export default router;
  *         twitterLink:
  *            type: string
  *            nullable: true
+ *         logo:
+ *            type: string
+ *            nullable: true
+ *         shortName:
+ *            type: string
+ *            nullable: true
  *         createdAt:
  *            type: string
  *            format: date-time
@@ -356,6 +362,12 @@ export default router;
  *            type: string
  *            nullable: true
  *          twitterLink:
+ *            type: string
+ *            nullable: true
+ *          logo:
+ *            type: string
+ *            nullable: true
+ *          shortName:
  *            type: string
  *            nullable: true
  */

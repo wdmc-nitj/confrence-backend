@@ -4,9 +4,11 @@ export default interface home {
   confStartDate: Date;
   confEndDate: Date;
   aboutConf: string;
-  aboutIns: string;
-  youtubeLink: string;
-  instaLink: string;
-  facebookLink: string;
-  twitterLink: string;
+  aboutIns?: string;
+  youtubeLink?: string;
+  instaLink?: string;
+  facebookLink?: string;
+  twitterLink?: string;
+  logo?: string;
+  shortName?: string;
 }

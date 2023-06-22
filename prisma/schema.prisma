@@ -28,6 +28,7 @@ model Confrence {
   Speakers    Speakers[]
   Committees  Committees[]
   Contact     Contact[]
+  Location    Location?
 }
 
 model Home {
@@ -37,6 +38,8 @@ model Home {
   confName      String
   confStartDate DateTime
   confEndDate   DateTime
+  logo          String?
+  shortName     String?
   aboutConf     String
   aboutIns      String?
   youtubeLink   String?
@@ -52,6 +55,7 @@ model EventDates {
   confId    String    @db.ObjectId
   conf      Confrence @relation(fields: [confId], references: [id])
   title     String?
+  date      DateTime  @default(now())
   sequence  Int       @default(0)
   extended  Boolean   @default(false)
   newDate   DateTime?
@@ -63,26 +67,26 @@ model EventDates {
 
 model Announcement {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId          String    @db.ObjectId
-  Conf            Confrence @relation(fields: [ConfId], references: [id])
-  Title           String
-  MetaDescription String?
-  Description     String
+  confId          String    @db.ObjectId
+  conf            Confrence @relation(fields: [confId], references: [id])
+  title           String
+  metaDescription String?
+  description     String
   feature         Boolean   @default(true)
   sequence        Int       @default(0)
-  New             Boolean   @default(true)
+  new             Boolean   @default(true)
   hidden          Boolean   @default(false)
-  Link            String?
+  link            String?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @default(now()) @updatedAt
 }
 
 model Images {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId    String    @db.ObjectId
-  Conf      Confrence @relation(fields: [ConfId], references: [id])
-  Name      String?
-  ImgLink   String
+  confId    String    @db.ObjectId
+  conf      Confrence @relation(fields: [confId], references: [id])
+  name      String?
+  imgLink   String
   feature   Boolean   @default(true)
   sequence  Int       @default(0)
   createdAt DateTime  @default(now())
@@ -156,21 +160,33 @@ model Committees {
 
 model Contact {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  ConfId      String    @db.ObjectId
-  Conf        Confrence @relation(fields: [ConfId], references: [id])
-  Title       String
-  Name        String
-  Designation String
-  ImgLink     String?
-  Institute   String
-  ProfileLink String
-  Phone       String
-  Email       String
-  Fax         String?
+  confId      String    @db.ObjectId
+  conf        Confrence @relation(fields: [confId], references: [id])
+  title       String
+  name        String
+  designation String
+  imgLink     String?
+  institute   String
+  profileLink String
+  phone       String
+  email       String
+  fax         String?
   feature     Boolean   @default(true)
   sequence    Int       @default(0)
-  LocationDes String?
-  LocatinLink String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+}
+
+model Location {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  confId      String    @unique @db.ObjectId
+  conf        Confrence @relation(fields: [confId], references: [id])
+  description String
+  address     String
+  latitude    String
+  longitude   String
+  feature     Boolean   @default(true)
+  sequence    Int       @default(0)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @default(now()) @updatedAt
 }
