@@ -10,7 +10,7 @@ router.get("/", userController.getAllUsers);
 router.post("/bulk", userController.addUsersInBulk);
 router.delete("/bulk", userController.deleteAllUsers);
 
-router.get("/team/:team", userController.getUserByTeam);
+router.get("/team/:teamId", userController.getUserByTeamId);
 router.get("/token/:token", userController.getUserByToken);
 router.get("/accessType/:accessType", userController.getUsersByAccessType);
 
@@ -34,7 +34,13 @@ export default router;
  *     User:
  *       type: object
  *       properties:
- *         team:
+ *         teamId:
+ *           type: string
+ *         teamName:
+ *           type: string
+ *         name:
+ *           type: string
+ *         email:
  *           type: string
  *         token:
  *           type: string
@@ -79,7 +85,7 @@ export default router;
  *       500:
  *         description: Internal server error
  *
- * /users/team/{team}:
+ * /users/team/{teamId}:
  *   get:
  *     summary: Get a user by team
  *     tags: [Users]
@@ -89,7 +95,7 @@ export default router;
  *         schema:
  *           type: string
  *         required: true
- *         description: Team of the user
+ *         description: Get user by Team ID
  *     responses:
  *       200:
  *         description: The requested user
@@ -251,6 +257,6 @@ export default router;
  *                   type: string
  *       500:
  *         description: Internal server error
- * 
+ *
  *
  */
