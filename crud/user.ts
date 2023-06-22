@@ -5,15 +5,11 @@ import userInterface from "../models/user";
 
 export default class User {
   async createUser(req: Request, res: Response) {
-    const { team, token, accessType } = req.body as userInterface;
+    const newUser = req.body as userInterface;
 
     try {
       const user = await prisma.user.create({
-        data: {
-          team,
-          token,
-          accessType,
-        },
+        data: newUser,
       });
 
       res.json(user);
@@ -53,18 +49,14 @@ export default class User {
 
   async updateUser(req: Request, res: Response) {
     const userId = req.params.id;
-    const { team, token, accessType } = req.body as userInterface;
+    const newUserData = req.body as userInterface;
 
     try {
       const updatedUser = await prisma.user.update({
         where: {
           id: userId,
         },
-        data: {
-          team,
-          token,
-          accessType,
-        },
+        data: newUserData,
       });
 
       res.json(updatedUser);
@@ -99,13 +91,13 @@ export default class User {
     }
   }
 
-  async getUserByTeam(req: Request, res: Response) {
-    const team = req.params.team;
+  async getUserByTeamId(req: Request, res: Response) {
+    const teamId = req.params.teamId;
 
     try {
-      const user = await prisma.user.findFirst({
+      const user = await prisma.user.findMany({
         where: {
-          team,
+          teamId: teamId,
         },
       });
 

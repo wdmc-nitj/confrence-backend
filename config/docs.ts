@@ -43,6 +43,9 @@ const options = {
     "./routes/user.ts",
     "./routes/participant.ts",
     "./routes/announcement.ts",
+    "./docs/contactUs.ts",
+    "./docs/images.ts",
+    "./docs/location.ts",
   ],
 };
 
