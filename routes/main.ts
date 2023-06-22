@@ -17,14 +17,18 @@ import speakersRouter from "./speakers";
 import sponsorsRouter from "./sponsors";
 import usersRouter from "./user";
 import annoucmentRouter from "./announcement";
-
+import imagesRouter from "./images";
+import contactUsRouter from "./contactUs";
+import locationRouter from "./location";
 // crud approach
 mainRouter.use("/conf", conf);
 mainRouter.use("/home", home);
 mainRouter.use("/navbar", navbar);
 mainRouter.use("/participant", participant);
 mainRouter.use("/announcement", annoucmentRouter);
-
+mainRouter.use("/images", imagesRouter);
+mainRouter.use("/contacts", contactUsRouter);
+mainRouter.use("/location", locationRouter)
 
 // controller approach
 mainRouter.use("/awards", awardsRouter);
