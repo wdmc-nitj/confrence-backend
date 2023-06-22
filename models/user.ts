@@ -1,5 +1,8 @@
 export default interface user {
-    team: string;
+    teamId: string;
+    teamName: string;
+    name: string;
+    email: string;
     token: string;
     accessType: string;
 }
