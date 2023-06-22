@@ -34,18 +34,7 @@ const options = {
     ],
   },
   apis: [
-    "./routes/awards.ts",
-    "./routes/conf.ts",
-    "./routes/eventDate.ts",
-    "./routes/home.ts",
-    "./routes/navbar.ts",
-    "./routes/sponsors.ts",
-    "./routes/user.ts",
-    "./routes/participant.ts",
-    "./routes/announcement.ts",
-    "./docs/contactUs.ts",
-    "./docs/images.ts",
-    "./docs/location.ts",
+    "./docs/*.ts",
   ],
 };
 
