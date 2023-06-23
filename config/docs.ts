@@ -36,6 +36,7 @@ const options = {
   apis: [
     "./routes/awards.ts",
     "./routes/announcement.ts",
+    "./routes/committees.ts",
     "./routes/conf.ts",
     "./docs/contactUs.ts",
     "./routes/eventDate.ts",
@@ -44,6 +45,7 @@ const options = {
     "./docs/location.ts",
     "./routes/navbar.ts",
     "./routes/participant.ts",
+    "./routes/speakers.ts",
     "./routes/sponsors.ts",
     "./routes/user.ts",
   ],
