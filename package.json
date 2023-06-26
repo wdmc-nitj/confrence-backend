@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "@sentry/node": "^7.56.0",
     "@types/cors": "^2.8.13",
     "@types/node": "^15.14.1",
     "@types/swagger-jsdoc": "^6.0.1",
