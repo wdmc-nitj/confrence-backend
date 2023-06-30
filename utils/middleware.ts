@@ -32,6 +32,7 @@ const allowAlwaysRoutes = [
   /^\/$/, // /
   /^\/api-docs(?:\/|$)/, // /api-docs and /api-docs/*
   /^\/favicon.ico$/, // /favicon.ico
+  /^\/debug-sentry(?:\/|$)/, // /debug-sentry and /debug-sentry/*
 ];
 
 const adminOnlyRoutes = [
