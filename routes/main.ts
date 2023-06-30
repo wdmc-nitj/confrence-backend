@@ -48,4 +48,8 @@ mainRouter.use(
   swaggerUi.setup(specs, { swaggerOptions: swaggerUiOptions })
 );
 
+mainRouter.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
+});
+
 export default mainRouter;
