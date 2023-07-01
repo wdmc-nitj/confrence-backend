@@ -44,6 +44,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", limiter, mainRouter);
 
+// Serve the favicon.ico file
+app.use(express.static("public"));
+
 // The error handler must be before any other error middleware and after all controllers
 app.use(Sentry.Handlers.errorHandler());
 
