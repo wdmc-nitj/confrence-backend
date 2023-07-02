@@ -36,7 +36,6 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(verifyAdmin);
 app.use(authenticate());
@@ -44,6 +43,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", limiter, mainRouter);
+
+// Serve the favicon.ico file
+app.use(express.static("public"));
 
 // The error handler must be before any other error middleware and after all controllers
 app.use(Sentry.Handlers.errorHandler());
