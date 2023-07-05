@@ -62,6 +62,11 @@ const authenticate = () => {
         return res.status(401).json({ error: "Unauthorized" });
       }
 
+      // return unauthorized if user.disabled is true
+      if (user.disabled) {
+        return res.status(401).json({ error: "Your API Key has been disabled. The possible reason might be overuse/spam of API." });
+      }
+
       if (
         adminOnlyRoutes.some((route) => route.test(req.path)) &&
         user.accessType !== AccessType.ADMIN
