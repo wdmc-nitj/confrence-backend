@@ -64,7 +64,7 @@ const authenticate = () => {
 
       // return unauthorized if user.disabled is true
       if (user.disabled) {
-        return res.status(401).json({ error: "Your API Key has been disabled. Contact the admins for more info." });
+        return res.status(401).json({ error: "Your API Key has been disabled. The possible reason might be overuse/spam of API or disqualification in a previous round. Contact the admins for more info" });
       }
 
       if (
