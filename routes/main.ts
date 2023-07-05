@@ -39,13 +39,20 @@ mainRouter.use("/sponsors", sponsorsRouter);
 mainRouter.use("/users", usersRouter);
 
 mainRouter.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send(
+    `Hello World! <br> Please visit <a href="/api-docs">/api-docs</a> for the API documentation`
+  );
 });
+
 
 mainRouter.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(specs, { swaggerOptions: swaggerUiOptions })
 );
+
+mainRouter.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
+});
 
 export default mainRouter;
