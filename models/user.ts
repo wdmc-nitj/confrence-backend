@@ -5,4 +5,5 @@ export default interface user {
     email: string;
     token: string;
     accessType: string;
+    disabled: boolean;
 }
