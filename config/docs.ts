@@ -5,7 +5,7 @@ const options = {
     openapi: "3.0.0",
     info: {
       title: "Conference API",
-      version: "2.0.0",
+      version: "2.0.5",
       description: "PiXel Perfect Hackathon",
     },
     servers: [
@@ -15,8 +15,12 @@ const options = {
       },
       {
         url: "https://conference.cyclic.app",
-        description: "Production server",
+        description: "Production server (to be used by the teams)",
       },
+      {
+        url: "https://staging.cyclic.app",
+        description: "Staging"
+      }
     ],
     components: {
       securitySchemes: {
