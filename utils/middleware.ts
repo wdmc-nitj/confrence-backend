@@ -64,7 +64,10 @@ const authenticate = () => {
 
       // return unauthorized if user.disabled is true
       if (user.disabled) {
-        return res.status(401).json({ error: "Your API Key has been disabled. The possible reason might be overuse/spam of API or disqualification in a previous round. Contact the admins for more info" });
+        return res.status(401).json({
+          error:
+            "Your API Key has been disabled. The possible reason might be overuse/spam of API or disqualification in a previous round. Contact the admins for more info",
+        });
       }
 
       if (
@@ -86,10 +89,6 @@ const authenticate = () => {
 
       // Check if the user's access type matches the required access type
       if (user.accessType !== requiredAccessType) {
-        // log both the user's access type and the required access type
-        console.log(
-          `User access type: ${user.accessType}, required access type: ${requiredAccessType}`
-        );
         return res.status(403).json({ error: "Forbidden" });
       }
 
@@ -115,7 +114,7 @@ const determineAccessTypeFromRequestMethod = (method: string) => {
 const limiter = rateLimit({
   windowMs: 20 * 60 * 1000, // 20 minutes
   max: 800, // Maximum number of requests allowed in the time window
-  keyGenerator: (req:Request) => {
+  keyGenerator: (req: Request) => {
     // Use the user's token as the rate limiting identifier
     const userToken = req.headers["authorization"];
     return userToken || ""; // Return an empty string if no token is present
