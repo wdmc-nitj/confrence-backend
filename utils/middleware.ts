@@ -112,8 +112,8 @@ const determineAccessTypeFromRequestMethod = (method: string) => {
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 20 * 60 * 1000, // 20 minutes
-  max: 800, // Maximum number of requests allowed in the time window
+  windowMs: 2 * 60 * 1000, // 2 minutes
+  max: 80, // Maximum number of requests allowed in the time window
   keyGenerator: (req: Request) => {
     // Use the user's token as the rate limiting identifier
     const userToken = req.headers["authorization"];
