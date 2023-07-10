@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 // import verifyAdmin from './utils/middleware';
-import { authenticate, limiter } from "./utils/middleware";
+import { authenticate } from "./utils/middleware";
 
 // routes import
 import mainRouter from "./routes/main";
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(verifyAdmin);
 app.use(authenticate());
 app.use(express.json());
-app.use("/", limiter, mainRouter);
+app.use("/", mainRouter);
 
 // Serve the favicon.ico file
 app.use(express.static("public"));
