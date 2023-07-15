@@ -6,7 +6,7 @@ const options = {
     info: {
       title: "Conference API",
       version: "2.0.5",
-      description: "PiXel Perfect Hackathon",
+      description: "Please select the server from the dropdown below to test the API. Hackathon teams should use either production server 1 or 2.",
     },
     servers: [
       {
@@ -15,12 +15,16 @@ const options = {
       },
       {
         url: "https://conference.cyclic.app",
-        description: "Production server (to be used by the teams)",
+        description: "Production server 1 (Cyclic)",
+      },
+      {
+        url: "https://pixelperfectnitj.onrender.com",
+        description: "Production server 2 (Render)",
       },
       {
         url: "https://staging.cyclic.app",
-        description: "Staging"
-      }
+        description: "Staging",
+      },
     ],
     components: {
       securitySchemes: {
