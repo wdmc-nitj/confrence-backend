@@ -123,4 +123,4 @@ const limiter = rateLimit({
 });
 
 export default verifyAdmin;
-export { authenticate, AccessType, limiter };
+export { authenticate, limiter };
