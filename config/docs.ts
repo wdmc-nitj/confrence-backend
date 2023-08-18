@@ -22,7 +22,7 @@ const options = {
         description: "Production server 2 (Render)",
       },
       {
-        url: "https://staging.cyclic.app",
+        url: "https://staging.cyclic.cloud",
         description: "Staging",
       },
     ],
